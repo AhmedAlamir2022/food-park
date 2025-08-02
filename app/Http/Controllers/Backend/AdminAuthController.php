@@ -35,12 +35,12 @@ class AdminAuthController extends Controller
         return view('admin.dashboard.index');
     }
 
-    function clearNotification() {
-        $notification = OrderPlacedNotification::query()->update(['seen' => 1]);
+    // function clearNotification() {
+    //     $notification = OrderPlacedNotification::query()->update(['seen' => 1]);
 
-        toastr()->success('Notification Cleared Successfully!');
-        return redirect()->back();
-    }
+    //     toastr()->success('Notification Cleared Successfully!');
+    //     return redirect()->back();
+    // }
 
     function forgetPassword()
     {

@@ -230,7 +230,7 @@
 
                 $.ajax({
                     method: 'POST',
-                    url: "",
+                    url: "{{ route('profile.avatar.update') }}",
                     data: formData,
                     processData: false,
                     contentType: false,

@@ -11,18 +11,29 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/fontawesome/css/all.min.css') }}">
 
+
+
     <link rel="stylesheet" href="{{ asset('admin/assets/css/toastr.min.css') }}">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap-iconpicker.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/summernote/summernote-bs4.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('admin/assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('admin/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/components.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('admin/assets/modules/datatables/datatables.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('admin/assets/modules/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('admin/assets/modules/datatables/Select-1.2.4/css/select.bootstrap4.min.css') }}" --}}
+
+
     <!-- Start GA -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
     <script>
@@ -48,7 +59,8 @@
             </div>
             <footer class="main-footer">
                 <div class="footer-left">
-                    Copyright &copy; {{ date('Y') }} <div class="bullet"></div> Developed By <a href="https://websolutionus.com">Websolutionus</a>
+                    Copyright &copy; {{ date('Y') }} <div class="bullet"></div> Developed By <a
+                        href="https://websolutionus.com">Websolutionus</a>
                 </div>
                 <div class="footer-right">
 
@@ -70,7 +82,7 @@
     <script src="{{ asset('admin/assets/js/bootstrap-iconpicker.bundle.min.js') }}"></script>
 
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
@@ -83,7 +95,12 @@
     <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
 
 
-
+    <script src="{{ asset('admin/assets/modules/datatables/datatables.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/modules/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js') }}">
+    </script>
+    <script src="{{ asset('admin/assets/modules/datatables/Select-1.2.4/js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/modules/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('admin/assets/js/page/modules-datatables.js')}}"></script>
     <!-- show dynamic validation message-->
     <script>
         toastr.options.progressBar = true;
@@ -127,14 +144,16 @@
                         $.ajax({
                             method: 'DELETE',
                             url: url,
-                            data: {_token: "{{ csrf_token() }}"},
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
                             success: function(response) {
-                                if(response.status === 'success'){
+                                if (response.status === 'success') {
                                     toastr.success(response.message)
 
                                     window.location.reload();
 
-                                }else if(response.status === 'error'){
+                                } else if (response.status === 'error') {
                                     toastr.error(response.message)
                                 }
                             },
@@ -147,7 +166,6 @@
             })
 
         })
-
     </script>
 
     @stack('scripts')

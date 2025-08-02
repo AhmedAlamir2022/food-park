@@ -96,9 +96,9 @@
 
             <li class="menu-header">Starter</li>
 
-            {{-- <li class="{{ setSidebarActive(['admin.slider.*']) }}"><a class="nav-link"
+            <li class="{{ setSidebarActive(['admin.slider.*']) }}"><a class="nav-link"
                     href="{{ route('admin.slider.index') }}"><i class="fas fa-images"></i>
-                    <span>Slider</span></a></li> --}}
+                    <span>Slider</span></a></li>
 
             {{-- <li class="{{ setSidebarActive(['admin.daily-offer.*']) }}"><a class="nav-link"
                     href="{{ route('admin.daily-offer.index') }}"><i class="far fa-clock"></i>
@@ -190,8 +190,8 @@
                     <li class="{{ setSidebarActive(['admin.blogs.comments.index']) }}"><a class="nav-link"
                             href="{{ route('admin.blogs.comments.index') }}">Comments</a></li>
             </li> --}}
-        </ul>
-        </li>
+        {{-- </ul>
+        </li> --}}
 
 
         {{-- <li

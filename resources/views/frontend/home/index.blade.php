@@ -4,7 +4,7 @@
     <!--=============================
             BANNER START
         ==============================-->
-    {{-- @include('frontend.home.components.slider') --}}
+    @include('frontend.home.components.slider')
     <!--=============================
             BANNER END
         ==============================-->

@@ -1,6 +1,4 @@
-{{-- @php
-    $MainMenu = Menu::getByName('main_menu');
-@endphp --}}
+
 
 <nav class="navbar navbar-expand-lg main_menu">
     <div class="container">
@@ -63,10 +61,10 @@
                         </form>
                     </div>
                 </li>
-                {{-- <li>
+                <li>
                     <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span
                             class="cart_count">{{ count(Cart::content()) }}</span></a>
-                </li> --}}
+                </li>
                 {{-- @php
                     @$unseenMessages = \App\Models\Chat::where([
                         'sender_id' => 1,
@@ -94,7 +92,7 @@
     </div>
 </nav>
 
-{{-- <div class="fp__menu_cart_area">
+<div class="fp__menu_cart_area">
     <div class="fp__menu_cart_boody">
         <div class="fp__menu_cart_header">
             <h5>total item (<span class="cart_count" style="font-size: 16px">{{ count(Cart::content()) }}</span>)</h5>
@@ -133,7 +131,7 @@
         <p class="subtotal">sub total <span class="cart_subtotal">{{ currencyPosition(cartTotal()) }}</span></p>
         <a class="cart_view" href="{{ route('cart.index') }}"> view cart</a>
     </div>
-</div> --}}
+</div>
 {{-- @php
     $reservationTimes = \App\Models\ReservationTime::where('status', 1)->get();
 @endphp

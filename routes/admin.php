@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\AdminAuthController;
+use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\WhyChooseUsController;
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
@@ -23,6 +24,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     /** Why choose us Routes */
     Route::put('why-choose-title-update', [WhyChooseUsController::class, 'updateTitle'])->name('why-choose-title.update');
     Route::resource('why-choose-us', WhyChooseUsController::class);
+
+    /** Product Category Routes */
+    Route::resource('category', CategoryController::class);
 
 
     /** Setting Routes */

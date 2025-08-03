@@ -4,8 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ProfileController;
 use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\FrontEnd\DashboardController;
+use App\Http\Controllers\Frontend\PaymentController;
 
 /** Admin Auth Routes */
 Route::group(['middleware' => 'guest'], function () {
@@ -25,6 +27,14 @@ Route::group(['middleware' => 'auth', 'role:user'], function () {
     Route::post('address', [DashboardController::class, 'createAddress'])->name('address.store');
     Route::put('address/{id}/edit', [DashboardController::class, 'updateAddress'])->name('address.update');
     Route::delete('address/{id}', [DashboardController::class, 'destroyAddress'])->name('address.destroy');
+
+    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::get('checkout/{id}/delivery-cal', [CheckoutController::class, 'CalculateDeliveryCharge'])->name('checkout.delivery-cal');
+    Route::post('checkout', [CheckoutController::class, 'checkoutRedirect'])->name('checkout.redirect');
+
+    /** Payment Routes */
+    Route::get('payment', [PaymentController::class, 'index'])->name('payment.index');
+    Route::post('make-payment', [PaymentController::class, 'makePayment'])->name('make-payment');
 });
 
 require __DIR__ . '/auth.php';
@@ -56,10 +66,8 @@ Route::post('/apply-coupon', [FrontendController::class, 'applyCoupon'])->name('
 Route::get('/destroy-coupon', [FrontendController::class, 'destroyCoupon'])->name('destroy-coupon');
 
 
-Route::group(['middleware' => 'auth'], function(){
-    Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 
-});
+
 
 
 

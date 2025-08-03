@@ -22,10 +22,12 @@
                     <table class="table table-striped" id="table-2">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>#</th>
                                 <th>Image</th>
                                 <th>Title</th>
                                 <th>Status</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -33,7 +35,7 @@
 
                             @forelse ($sliders as $slider)
                                 <tr>
-                                    <td>{{ $slider->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td class="align-middle">
                                         <img width="100px" src="{{ asset($slider->image) }}" class="rounded-circle"
                                             alt="{{ $slider->title }}">
@@ -44,6 +46,12 @@
                                     <td><span class="badge {{ $slider->status === 1 ? 'badge-primary' : 'badge-danger' }}">
                                             {{ $slider->status === 1 ? 'Active' : 'InActive' }}
                                         </span>
+                                    </td>
+                                    <td>
+                                        {{ $slider->created_at->format('Y-m-d H:i:s') }}
+                                    </td>
+                                    <td>
+                                        {{ $slider->updated_at->diffForHumans() }}
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.slider.edit', $slider->id) }}" class="btn btn-primary">
@@ -59,11 +67,13 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">No sliders found</td>
+                                    <td colspan="7" class="text-center">No sliders found</td>
                                 </tr>
                             @endforelse
                         </tbody>
+
                     </table>
+                    {{ $sliders->links() }}
                 </div>
             </div>
         </div>

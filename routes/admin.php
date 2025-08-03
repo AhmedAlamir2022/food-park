@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\MenuBuilderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductGalleryController;
@@ -48,6 +49,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     /** Product Size Routes */
     Route::resource('product-option', ProductOptionController::class);
 
+    /** Coupon Routes */
+    Route::resource('coupon', CouponController::class);
+
 
     /** Setting Routes */
     Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
@@ -58,6 +62,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::put('/appearance-setting', [SettingController::class, 'UpdateAppearanceSetting'])->name('appearance-setting.update');
     Route::put('/seo-setting', [SettingController::class, 'UpdateSeoSetting'])->name('seo-setting.update');
 
-    
+
 
 });

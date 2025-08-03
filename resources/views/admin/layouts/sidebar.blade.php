@@ -144,21 +144,21 @@
                 </ul>
             </li>
 
-            {{-- <li
+            <li
                 class="dropdown {{ setSidebarActive(['admin.coupon.*', 'admin.delivery-area.*', 'admin.payment-setting.index']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-store"></i>
-                    <span> Manage Ecommerce </span></a>
+                    <span> Manage E-commerce </span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.coupon.*']) }}"><a class="nav-link"
                             href="{{ route('admin.coupon.index') }}">Coupon</a></li>
-                    <li class="{{ setSidebarActive(['admin.delivery-area.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.delivery-area.index') }}">Delivery Areas</a></li>
-                    <li class="{{ setSidebarActive(['admin.payment-setting.index']) }}"><a class="nav-link"
-                            href="{{ route('admin.payment-setting.index') }}">Payment Gateways</a>
+                    {{-- <li class="{{ setSidebarActive(['admin.delivery-area.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.delivery-area.index') }}">Delivery Areas</a></li> --}}
+                    {{-- <li class="{{ setSidebarActive(['admin.payment-setting.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.payment-setting.index') }}">Payment Gateways</a> --}}
                     </li>
 
                 </ul>
-            </li> --}}
+            </li>
 
             {{-- <li
                 class="dropdown {{ setSidebarActive(['admin.reservation-time.*', 'admin.reservation.index']) }}">
@@ -262,7 +262,7 @@
                 href="{{ route('admin.footer-info.index') }}"> <i class="fas fa-info-circle"></i> <span>Footer
                     Info</span></a></li> --}}
 
-       
+
 
         {{-- <li class="{{ setSidebarActive(['admin.admin-management.*']) }}"><a class="nav-link"
                 href="{{ route('admin.admin-management.index') }}"><i class="fas fa-user-shield"></i>

@@ -27,6 +27,15 @@ require __DIR__ . '/auth.php';
 /** Show Home page */
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
+/** Product page Route*/
+Route::get('/products', [FrontendController::class, 'products'])->name('product.index');
+
+/** Show Product details page */
+Route::get('/product/{slug}', [FrontendController::class, 'showProduct'])->name('product.show');
+
+/** Add to cart Route */
+Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
+
 
 
 

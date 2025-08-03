@@ -136,8 +136,8 @@
                 <ul class="dropdown-menu">
                     <li class="{{ setSidebarActive(['admin.category.*']) }}"><a class="nav-link"
                             href="{{ route('admin.category.index') }}">Product Categories</a></li>
-                    {{-- <li class="{{ setSidebarActive(['admin.product.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.product.index') }}">Products</a></li> --}}
+                    <li class="{{ setSidebarActive(['admin.product.*']) }}"><a class="nav-link"
+                            href="{{ route('admin.product.index') }}">Products</a></li>
                     {{-- <li class="{{ setSidebarActive(['admin.product-reviews.index']) }}"><a class="nav-link"
                             href="{{ route('admin.product-reviews.index') }}">Product Reviews</a>
                     </li> --}}
@@ -262,9 +262,7 @@
                 href="{{ route('admin.footer-info.index') }}"> <i class="fas fa-info-circle"></i> <span>Footer
                     Info</span></a></li> --}}
 
-        {{-- <li class="{{ setSidebarActive(['admin.menu-builder.index']) }}"><a class="nav-link"
-                href="{{ route('admin.menu-builder.index') }}"><i class="fas fa-list-alt"></i>
-                <span>Menu Builder</span></a></li> --}}
+       
 
         {{-- <li class="{{ setSidebarActive(['admin.admin-management.*']) }}"><a class="nav-link"
                 href="{{ route('admin.admin-management.index') }}"><i class="fas fa-user-shield"></i>

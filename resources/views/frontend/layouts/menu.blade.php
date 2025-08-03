@@ -13,28 +13,47 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav m-auto">
-                {{-- @if ($MainMenu)
-                    @foreach ($MainMenu as $menu)
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ $menu['link'] }}">{{ $menu['label'] }}
-                                @if ($menu['child'])
-                                    <i class="far fa-angle-down"></i>
-                                @endif
-                            </a>
-                            @if ($menu['child'])
-                                <ul class="droap_menu">
-                                    @foreach ($menu['child'] as $item)
-                                        <li><a href="{{ $item['link'] }}">{{ $item['label'] }}</a></li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                        </li>
-                    @endforeach
-                @endif --}}
-
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{ url('/') }}">Home</a>
+                </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="about.html">about</a>
+                </li> --}}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('product.index') }}">Products</a>
+                </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="chefs.html">chefs</a>
+                </li> --}}
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="#">pages <i class="far fa-angle-down"></i></a>
+                    <ul class="droap_menu">
+                        <li><a href="menu_details.html">menu details</a></li>
+                        <li><a href="blog_details.html">blog details</a></li>
+                        <li><a href="cart_view.html">cart view</a></li>
+                        <li><a href="check_out.html">checkout</a></li>
+                        <li><a href="payment.html">payment</a></li>
+                        <li><a href="testimonial.html">testimonial</a></li>
+                        <li><a href="search_menu.html">search result</a></li>
+                        <li><a href="404.html">404/Error</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="sign_in.html">sign in</a></li>
+                        <li><a href="sign_up.html">sign up</a></li>
+                        <li><a href="forgot_password.html">forgot password</a></li>
+                        <li><a href="privacy_policy.html">privacy policy</a></li>
+                        <li><a href="terms_condition.html">terms and condition</a></li>
+                    </ul>
+                </li> --}}
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="blogs.html">blog</a>
+                </li> --}}
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="contact.html">contact</a>
+                </li> --}}
             </ul>
+
             <ul class="menu_icon d-flex flex-wrap">
-                {{-- <li>
+                <li>
                     <a href="#" class="menu_search"><i class="far fa-search"></i></a>
                     <div class="fp__search_form">
                         <form action="{{ route('product.index') }}" method="GET">
@@ -43,7 +62,7 @@
                             <button type="submit">search</button>
                         </form>
                     </div>
-                </li> --}}
+                </li>
                 {{-- <li>
                     <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span
                             class="cart_count">{{ count(Cart::content()) }}</span></a>
@@ -161,7 +180,7 @@
                     data: formData,
                     beforeSend: function() {
                         $('.btn_submit').html(
-                        `<span class="spinner-border text-light"> <span>`);
+                            `<span class="spinner-border text-light"> <span>`);
                     },
                     success: function(response) {
                         toastr.success(response.message);

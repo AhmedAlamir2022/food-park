@@ -16,7 +16,8 @@ use App\Http\Controllers\Backend\ProductOptionController;
 use App\Http\Controllers\Backend\ProductSizeController;
 use App\Http\Controllers\Backend\WhyChooseUsController;
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
+
+Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'],function () {
 
     Route::get('dashboard', [AdminAuthController::class, 'dashboard'])->name('dashboard');
 
@@ -65,7 +66,4 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::put('/logo-setting', [SettingController::class, 'UpdateLogoSetting'])->name('logo-setting.update');
     Route::put('/appearance-setting', [SettingController::class, 'UpdateAppearanceSetting'])->name('appearance-setting.update');
     Route::put('/seo-setting', [SettingController::class, 'UpdateSeoSetting'])->name('seo-setting.update');
-
-
-
 });

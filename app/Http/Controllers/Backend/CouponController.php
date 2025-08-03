@@ -31,6 +31,17 @@ class CouponController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'code' => ['required', 'max:50'],
+            'quantity' => ['required', 'integer'],
+            'min_purchase_amount' => ['required', 'integer'],
+            'expire_date' => ['required', 'date'],
+            'discount_type' => ['required'],
+            'discount' => ['required'],
+            'status' => ['required', 'boolean'],
+        ]);
+
         $coupon = new Coupon();
         $coupon->name = $request->name;
         $coupon->code = $request->code;
@@ -61,6 +72,18 @@ class CouponController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'code' => ['required', 'max:50'],
+            'quantity' => ['required', 'integer'],
+            'min_purchase_amount' => ['required', 'integer'],
+            'expire_date' => ['required', 'date'],
+            'discount_type' => ['required'],
+            'discount' => ['required'],
+            'status' => ['required', 'boolean'],
+        ]);
+
         $coupon = Coupon::findOrFail($id);
         $coupon->name = $request->name;
         $coupon->code = $request->code;

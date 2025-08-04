@@ -208,8 +208,8 @@
             <ul class="dropdown-menu">
                 <li class="{{ setSidebarActive(['admin.why-choose-us.*']) }}"><a class="nav-link"
                         href="{{ route('admin.why-choose-us.index') }}">Why choose us</a></li>
-                {{-- <li class="{{ setSidebarActive(['admin.banner-slider.*']) }}"><a class="nav-link"
-                        href="{{ route('admin.banner-slider.index') }}">Banner Slider</a></li> --}}
+                <li class="{{ setSidebarActive(['admin.banner-slider.*']) }}"><a class="nav-link"
+                        href="{{ route('admin.banner-slider.index') }}">Banner Slider</a></li>
                 {{-- <li class="{{ setSidebarActive(['admin.chefs.*']) }}"><a class="nav-link"
                         href="{{ route('admin.chefs.index') }}">Chefs</a></li> --}}
                 {{-- <li class="{{ setSidebarActive(['admin.app-download.index']) }}"><a class="nav-link"

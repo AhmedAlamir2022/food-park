@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\BannerSlider;
 use App\Models\Category;
 use App\Models\Coupon;
 use App\Models\DailyOffer;
@@ -32,7 +33,15 @@ class FrontendController extends Controller
             ->get();
         $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(15)->get();
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
-        return view('frontend.home.index', compact('sliders', 'whyChooseUs', 'sectionTitles', 'categories', 'dailyOffers'));
+        $bannerSliders = BannerSlider::where('status', 1)->latest()->take(10)->get();
+        return view('frontend.home.index', compact(
+            'sliders',
+            'whyChooseUs',
+            'sectionTitles',
+            'categories',
+            'dailyOffers',
+            'bannerSliders'
+        ));
     }
 
     function getSectionTitles(): Collection

@@ -22,11 +22,11 @@ class OrderService
             $order->grand_total = grandCartTotal(session()->get('delivery_fee'));
             $order->product_qty = \Cart::content()->count();
             $order->payment_method = $payment_method;
-            $order->payment_status = 'paid';
+            $order->payment_status = 'pending';
             $order->payment_approve_date = NULL;
             $order->coupon_info = json_encode(session()->get('coupon'));
             $order->currency_name = config('settings.site_default_currency');
-            $order->order_status = 'done';
+            $order->order_status = 'pending';
             $order->address_id = session()->get('address_id');
             $order->save();
 

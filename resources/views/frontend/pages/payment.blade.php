@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-            BREADCRUMB START
-        ==============================-->
+                BREADCRUMB START
+            ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset(config('settings.breadcrumb')) }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-            BREADCRUMB END
-        ==============================-->
+                BREADCRUMB END
+            ==============================-->
 
 
     <!--============================
-            PAYMENT PAGE START
-        ==============================-->
+                PAYMENT PAGE START
+            ==============================-->
     <section class="fp__payment_page mt_100 xs_mt_70 mb_100 xs_mb_70">
         <div class="container">
             <h2>Choose Your Payment Gateway</h2>
@@ -56,15 +56,16 @@
                                 </div>
                             @endif
 
-                            @if (config('gatewaySettings.razorpay_status'))
+                            {{-- @if (config('gatewaySettings.paymob_status'))
                                 <div class="col-lg-3 col-6 col-sm-4 col-md-3 wow fadeInUp" data-wow-duration="1s">
-                                    <a class="fp__single_payment payment-card" data-name="razorpay" data-bs-toggle="modal"
+                                    <a class="fp__single_payment payment-card" data-name="paymob" data-bs-toggle="modal"
                                         data-bs-target="#exampleModal" href="#">
-                                        <img src="{{ asset(config('gatewaySettings.razorpay_logo')) }}" alt="payment method"
+                                        <img src="{{ asset(config('gatewaySettings.paymob_logo')) }}" alt="payment method"
                                             class="img-fluid w-100">
                                     </a>
                                 </div>
-                            @endif
+                            @endif --}}
+
 
                         </div>
                     </div>

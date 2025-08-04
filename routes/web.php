@@ -2,18 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\ProfileController;
-use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\FrontEnd\DashboardController;
 use App\Http\Controllers\Frontend\PaymentController;
 
-/** Admin Auth Routes */
-Route::group(['middleware' => 'guest'], function () {
-    Route::get('admin/login', [AdminAuthController::class, 'index'])->name('admin.login');
-    Route::get('admin/forget-password', [AdminAuthController::class, 'forgetPassword'])->name('admin.forget-password');
-});
+
 
 Route::group(['middleware' => 'auth', 'role:user'], function () {
     /** dashboard routes */
@@ -47,6 +42,11 @@ Route::group(['middleware' => 'auth', 'role:user'], function () {
     Route::get('stripe/payment', [PaymentController::class, 'payWithStripe'])->name('stripe.payment');
     Route::get('stripe/success', [PaymentController::class, 'stripeSuccess'])->name('stripe.success');
     Route::get('stripe/cancel', [PaymentController::class, 'stripeCancel'])->name('stripe.cancel');
+
+    /** Paymob Routes */
+    // Route::get('paymob/payment', [PaymentController::class, 'payWithPaymob'])->name('paymob.payment');
+    // Route::get('paymob/success', [PaymentController::class, 'paymobSuccess'])->name('paymob.success');
+    // Route::get('paymob/cancel', [PaymentController::class, 'paymobCancel'])->name('paymob.cancel');
 });
 
 require __DIR__ . '/auth.php';

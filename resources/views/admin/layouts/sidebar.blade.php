@@ -104,7 +104,7 @@
                     href="{{ route('admin.daily-offer.index') }}"><i class="far fa-clock"></i>
                     <span>Daily Offer</span></a></li> --}}
 
-            {{-- <li
+            <li
                 class="dropdown {{ setSidebarActive([
                     'admin.orders.index',
                     'admin.pending-orders',
@@ -124,9 +124,9 @@
                     <li class="{{ setSidebarActive(['admin.delivered-orders']) }}"><a class="nav-link"
                             href="{{ route('admin.delivered-orders') }}">Delivered Orders</a></li>
                     <li class="{{ setSidebarActive(['admin.declined-orders']) }}"><a class="nav-link"
-                            href="{{ route('admin.declined-orders') }}">Decliend Orders</a></li>
+                            href="{{ route('admin.declined-orders') }}">Declined Orders</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
             <li
                 class="dropdown {{ setSidebarActive(['admin.category.*', 'admin.product.*', 'admin.product-reviews.index']) }}">

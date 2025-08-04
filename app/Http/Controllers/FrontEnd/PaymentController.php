@@ -49,7 +49,7 @@ class PaymentController extends Controller
     {
         // dd($request);
         $request->validate([
-            'payment_gateway' => ['required', 'string', 'in:paypal,stripe']
+            'payment_gateway' => ['required', 'string', 'in:paypal,stripe,paymob'],
         ]);
 
         $paymentGateway = $request->payment_gateway;
@@ -65,6 +65,9 @@ class PaymentController extends Controller
                 case 'stripe':
                     return response(['redirect_url' => route('stripe.payment')]);
                     break;
+
+                case 'paymob':
+                    return response(['redirect_url' => route('paymob.payment')]);
 
                 default:
                     break;
@@ -260,4 +263,54 @@ class PaymentController extends Controller
 
         OrderPaymentUpdateEvent::dispatch($orderId, $paymentInfo, $gatewayName);
     }
+
+    // public function payWithPaymob()
+    // {
+    //     $orderId = session('order_id');
+    //     $order = Order::findOrFail($orderId);
+    //     $amountInCents = $order->grand_total * 100;
+
+    //     // 1. Auth token
+    //     $auth = Http::post('https://accept.paymob.com/api/auth/tokens', [
+    //         'api_key' => config('gatewaySettings.paymob_api_key')
+    //     ])->json();
+
+    //     $token = $auth['token'];
+
+    //     // 2. Create order on Paymob
+    //     $paymobOrder = Http::post('https://accept.paymob.com/api/ecommerce/orders', [
+    //         'auth_token' => $token,
+    //         'delivery_needed' => false,
+    //         'amount_cents' => $amountInCents,
+    //         'currency' => 'EGP',
+    //         'items' => [],
+    //     ])->json();
+
+    //     // 3. Generate payment key
+    //     $paymentKey = Http::post('https://accept.paymob.com/api/acceptance/payment_keys', [
+    //         'auth_token' => $token,
+    //         'amount_cents' => $amountInCents,
+    //         'expiration' => 3600,
+    //         'order_id' => $paymobOrder['id'],
+    //         'billing_data' => [
+    //             'first_name' => auth()->user()->name,
+    //             'last_name' => 'Customer',
+    //             'email' => auth()->user()->email ?? 'example@mail.com',
+    //             'phone_number' => '0123456789',
+    //             'apartment' => 'NA',
+    //             'floor' => 'NA',
+    //             'street' => 'NA',
+    //             'building' => 'NA',
+    //             'city' => 'NA',
+    //             'country' => 'EG',
+    //             'state' => 'NA',
+    //         ],
+    //         'currency' => 'EGP',
+    //         'integration_id' => config('gatewaySettings.paymob_integration_id')
+    //     ])->json();
+
+    //     $iframeUrl = "https://accept.paymob.com/api/acceptance/iframes/" . config('gatewaySettings.paymob_iframe_id') . "?payment_token=" . $paymentKey['token'];
+
+    //     return redirect()->away($iframeUrl);
+    // }
 }

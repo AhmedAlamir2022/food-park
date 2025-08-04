@@ -11,6 +11,8 @@ use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Illuminate\Validation\ValidationException;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as StripeSession;
 
 class PaymentController extends Controller
 {
@@ -50,10 +52,12 @@ class PaymentController extends Controller
             'payment_gateway' => ['required', 'string', 'in:paypal,stripe']
         ]);
 
+        $paymentGateway = $request->payment_gateway;
+
         /** Create Order */
-        if ($orderService->createOrder()) {
+        if ($orderService->createOrder($paymentGateway)) {
             // redirect user to the payment host
-            switch ($request->payment_gateway) {
+            switch ($paymentGateway) {
                 case 'paypal':
                     return response(['redirect_url' => route('paypal.payment')]);
                     break;
@@ -173,7 +177,80 @@ class PaymentController extends Controller
         return redirect()->route('payment.cancel');
     }
 
-    function transactionFailUpdateStatus($gatewayName) : void {
+    function payWithStripe()
+    {
+        Stripe::setApiKey(config('gatewaySettings.stripe_secret_key'));
+        // dd(config('gatewaySettings.stripe_secret_key'));
+
+        /** calculate payable amount */
+        $grandTotal = session()->get('grand_total');
+        $payableAmount = round($grandTotal * config('gatewaySettings.stripe_rate')) * 100;
+        // dd($payableAmount);
+
+        $response = StripeSession::create([
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => config('gatewaySettings.stripe_currency'),
+                        'product_data' => [
+                            'name' => 'Product'
+                        ],
+                        'unit_amount' => $payableAmount
+                    ],
+                    'quantity' => 1
+                ]
+            ],
+            'mode' => 'payment',
+            'success_url' => route('stripe.success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('stripe.cancel')
+        ]);
+
+        return redirect()->away($response->url);
+    }
+
+    function stripeSuccess(Request $request, OrderService $orderService)
+    {
+        $sessionId = $request->session_id;
+        Stripe::setApiKey(config('gatewaySettings.stripe_secret_key'));
+
+        $response = StripeSession::retrieve($sessionId);
+
+        if ($response->payment_status === 'paid') {
+
+            $orderId = session()->get('order_id');
+            $paymentInfo = [
+                'transaction_id' => $response->payment_intent,
+                'currency' => $response->currency,
+                'status' => 'completed'
+            ];
+
+            // تحديث حالة الدفع
+            OrderPaymentUpdateEvent::dispatch($orderId, $paymentInfo, 'Stripe');
+
+
+            $order = Order::findOrFail($orderId);
+            OrderPlacedNotificationEvent::dispatch($order);
+            RTOrderPlacedNotificationEvent::dispatch($order);
+
+            // حذف بيانات الجلسة
+            $orderService->clearSession();
+
+            return redirect()->route('payment.success');
+        } else {
+            $this->transactionFailUpdateStatus('Stripe');
+            return redirect()->route('payment.cancel');
+        }
+    }
+
+
+    function stripeCancel()
+    {
+        $this->transactionFailUpdateStatus('Stripe');
+        return redirect()->route('payment.cancel');
+    }
+
+    function transactionFailUpdateStatus($gatewayName): void
+    {
         $orderId = session()->get('order_id');
         $paymentInfo = [
             'transaction_id' => '',

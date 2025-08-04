@@ -22,10 +22,6 @@
                                 <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#stripe-setting"
                                     role="tab" aria-controls="profile" aria-selected="false">Stripe</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="contact-tab4" data-toggle="tab" href="#razorpay-setting"
-                                    role="tab" aria-controls="contact" aria-selected="false">Razorpay</a>
-                            </li>
                         </ul>
                     </div>
                     <div class="col-12 col-sm-12 col-md-10">

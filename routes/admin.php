@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\DailyOfferController;
 use App\Http\Controllers\Backend\DeliveryAreaController;
 use App\Http\Controllers\Backend\MenuBuilderController;
 use App\Http\Controllers\Backend\OrderController;
@@ -24,7 +25,7 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('admin/forget-password', [AdminAuthController::class, 'forgetPassword'])->name('admin.forget-password');
 });
 
-Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'],function () {
+Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
 
     Route::get('dashboard', [AdminAuthController::class, 'dashboard'])->name('dashboard');
 
@@ -76,6 +77,12 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
 
     Route::get('orders/status/{id}', [OrderController::class, 'getOrderStatus'])->name('orders.status');
     Route::put('orders/status-update/{id}', [OrderController::class, 'orderStatusUpdate'])->name('orders.status-update');
+
+
+    /** Daily Offer Routes */
+    Route::get('daily-offer/search-product', [DailyOfferController::class, 'productSearch'])->name('daily-offer.search-product');
+    Route::put('daily-offer-title-update', [DailyOfferController::class, 'updateTitle'])->name('daily-offer-title-update');
+    Route::resource('daily-offer', DailyOfferController::class);
 
 
     /** Payment Gateway Setting Routes */

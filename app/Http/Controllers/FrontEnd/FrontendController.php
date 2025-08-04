@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Coupon;
+use App\Models\DailyOffer;
 use App\Models\Product;
 use App\Models\SectionTitle;
 use App\Models\Slider;
@@ -29,8 +30,9 @@ class FrontendController extends Controller
                     ->with('category'); // optional, if needed
             }])
             ->get();
+        $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(15)->get();
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
-        return view('frontend.home.index', compact('sliders', 'whyChooseUs', 'sectionTitles', 'categories'));
+        return view('frontend.home.index', compact('sliders', 'whyChooseUs', 'sectionTitles', 'categories', 'dailyOffers'));
     }
 
     function getSectionTitles(): Collection
@@ -42,9 +44,9 @@ class FrontendController extends Controller
             'product_top_title',
             'product_main_title',
             'product_sub_title',
-            // 'daily_offer_top_title',
-            // 'daily_offer_main_title',
-            // 'daily_offer_sub_title',
+            'daily_offer_top_title',
+            'daily_offer_main_title',
+            'daily_offer_sub_title',
             // 'chef_top_title',
             // 'chef_main_title',
             // 'chef_sub_title',
@@ -96,42 +98,44 @@ class FrontendController extends Controller
         }
 
         $products = $products
-        ->with('category')
-        // ->withAvg('reviews', 'rating')
-        // ->withCount('reviews')
-        ->paginate(12);
+            ->with('category')
+            // ->withAvg('reviews', 'rating')
+            // ->withCount('reviews')
+            ->paginate(12);
 
         $categories = Category::where('status', 1)->get();
 
         return view('frontend.pages.product', compact('products', 'categories'));
     }
 
-    function loadProductModal($productId) {
+    function loadProductModal($productId)
+    {
         $product = Product::with(['productSizes', 'productOptions'])->findOrFail($productId);
 
         return view('frontend.layouts.ajax-files.product-popup-modal', compact('product'))->render();
     }
 
-    function applyCoupon(Request $request) {
+    function applyCoupon(Request $request)
+    {
 
         $subtotal = $request->subtotal;
         $code = $request->code;
 
         $coupon = Coupon::where('code', $code)->first();
 
-        if(!$coupon) {
+        if (!$coupon) {
             return response(['message' => 'Invalid Coupon Code.'], 422);
         }
-        if($coupon->quantity <= 0){
+        if ($coupon->quantity <= 0) {
             return response(['message' => 'Coupon has been fully redeemed.'], 422);
         }
-        if($coupon->expire_date < now()){
+        if ($coupon->expire_date < now()) {
             return response(['message' => 'Coupon hs expired.'], 422);
         }
 
-        if($coupon->discount_type === 'percent') {
+        if ($coupon->discount_type === 'percent') {
             $discount = number_format($subtotal * ($coupon->discount / 100), 2);
-        }elseif ($coupon->discount_type === 'amount'){
+        } elseif ($coupon->discount_type === 'amount') {
             $discount = number_format($coupon->discount, 2);
         }
 
@@ -140,17 +144,16 @@ class FrontendController extends Controller
         session()->put('coupon', ['code' => $code, 'discount' => $discount]);
 
         return response(['message' => 'Coupon Applied Successfully.', 'discount' => $discount, 'finalTotal' => $finalTotal, 'coupon_code' => $code]);
-
     }
 
-    function destroyCoupon() {
-        try{
+    function destroyCoupon()
+    {
+        try {
             session()->forget('coupon');
             return response(['message' => 'Coupon Removed!', 'grand_cart_total' => grandCartTotal()]);
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             logger($e);
             return response(['message' => 'Something went wrong']);
-
         }
     }
 }

@@ -100,9 +100,9 @@
                     href="{{ route('admin.slider.index') }}"><i class="fas fa-images"></i>
                     <span>Slider</span></a></li>
 
-            {{-- <li class="{{ setSidebarActive(['admin.daily-offer.*']) }}"><a class="nav-link"
+            <li class="{{ setSidebarActive(['admin.daily-offer.*']) }}"><a class="nav-link"
                     href="{{ route('admin.daily-offer.index') }}"><i class="far fa-clock"></i>
-                    <span>Daily Offer</span></a></li> --}}
+                    <span>Daily Offer</span></a></li>
 
             <li
                 class="dropdown {{ setSidebarActive([

@@ -28,6 +28,10 @@
     <section class="fp__payment_page mt_100 xs_mt_70 mb_100 xs_mb_70">
         <div class="container">
             <h2>Choose Your Payment Gateway</h2>
+            {{-- {{ dump(config('gatewaySettings.paypal_logo')) }} --}}
+            {{-- <img src="{{ asset(config('gatewaySettings.paypal_logo')) }}" alt="payment method"
+                                            class="img-fluid w-100"> --}}
+
             <div class="row">
                 <div class="col-lg-8">
                     <div class="fp__payment_area">
@@ -99,6 +103,11 @@
                         showLoader();
                     },
                     success: function(response) {
+                        // if (response.status === 'success') {
+                        //     toastr.success(response.message);
+                        // } else {
+                        //     toastr.error(response.message);
+                        // }
                         window.location.href = response.redirect_url;
                     },
                     error: function(xhr, status, error) {

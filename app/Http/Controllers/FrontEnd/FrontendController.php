@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\AppDownloadSection;
 use App\Models\BannerSlider;
 use App\Models\Category;
 use App\Models\Chef;
@@ -36,6 +37,7 @@ class FrontendController extends Controller
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
         $bannerSliders = BannerSlider::where('status', 1)->latest()->take(10)->get();
         $chefs = Chef::where(['show_at_home' => 1, 'status' => 1])->get();
+        $appSection = AppDownloadSection::first();
         return view('frontend.home.index', compact(
             'sliders',
             'whyChooseUs',
@@ -43,7 +45,8 @@ class FrontendController extends Controller
             'categories',
             'dailyOffers',
             'bannerSliders',
-            'chefs'
+            'chefs',
+            'appSection'
         ));
     }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\AdminAuthController;
+use App\Http\Controllers\Backend\AppDownloadSectionController;
 use App\Http\Controllers\Backend\BannerSliderController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChefController;
@@ -92,6 +93,10 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     /** Chefs Routes */
     Route::put('chefs-title-update', [ChefController::class, 'updateTitle'])->name('chefs-title-update');
     Route::resource('chefs', ChefController::class);
+
+    /** App Download Routes */
+    Route::get('app-download', [AppDownloadSectionController::class, 'index'])->name('app-download.index');
+    Route::post('app-download', [AppDownloadSectionController::class, 'store'])->name('app-download.store');
 
 
     /** Payment Gateway Setting Routes */

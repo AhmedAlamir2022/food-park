@@ -212,9 +212,9 @@
                         href="{{ route('admin.banner-slider.index') }}">Banner Slider</a></li>
                 <li class="{{ setSidebarActive(['admin.chefs.*']) }}"><a class="nav-link"
                         href="{{ route('admin.chefs.index') }}">Chefs</a></li>
-                {{-- <li class="{{ setSidebarActive(['admin.app-download.index']) }}"><a class="nav-link"
+                <li class="{{ setSidebarActive(['admin.app-download.index']) }}"><a class="nav-link"
                         href="{{ route('admin.app-download.index') }}">App Download Section</a>
-                </li> --}}
+                </li>
                 {{-- <li class="{{ setSidebarActive(['admin.testimonial.*']) }}"><a class="nav-link"
                         href="{{ route('admin.testimonial.index') }}">Testimonial</a></li> --}}
                 {{-- <li class="{{ setSidebarActive(['admin.counter.index']) }}"><a class="nav-link"

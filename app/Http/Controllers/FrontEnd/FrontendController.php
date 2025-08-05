@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\AppDownloadSection;
 use App\Models\BannerSlider;
+use App\Models\Blog;
+use App\Models\BlogCategory;
+use App\Models\BlogComment;
 use App\Models\Category;
 use App\Models\Chef;
 use App\Models\Counter;
@@ -15,6 +18,7 @@ use App\Models\SectionTitle;
 use App\Models\Slider;
 use App\Models\Testimonial;
 use App\Models\WhyChooseUs;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
@@ -42,6 +46,9 @@ class FrontendController extends Controller
         $testimonials = Testimonial::where(['show_at_home' => 1, 'status' => 1])->get();
         $appSection = AppDownloadSection::first();
         $counter = Counter::first();
+        $latestBlogs = Blog::withCount(['comments' => function ($query) {
+            $query->where('status', 1);
+        }])->with(['category', 'user'])->where('status', 1)->latest()->take(3)->get();
         return view('frontend.home.index', compact(
             'sliders',
             'whyChooseUs',
@@ -52,7 +59,8 @@ class FrontendController extends Controller
             'chefs',
             'appSection',
             'testimonials',
-            'counter'
+            'counter',
+            'latestBlogs'
         ));
     }
 
@@ -77,6 +85,18 @@ class FrontendController extends Controller
         ];
 
         return SectionTitle::whereIn('key', $keys)->pluck('value', 'key');
+    }
+
+    function chef()
+    {
+        $chefs = Chef::where(['status' => 1])->paginate(12);
+        return view('frontend.pages.chefs', compact('chefs'));
+    }
+
+    function testimonial()
+    {
+        $testimonials = Testimonial::where(['status' => 1])->paginate(9);
+        return view('frontend.pages.testimonial', compact('testimonials'));
     }
 
 
@@ -176,5 +196,67 @@ class FrontendController extends Controller
             logger($e);
             return response(['message' => 'Something went wrong']);
         }
+    }
+
+    function blog(Request $request)
+    {
+        $blogs = Blog::withCount(['comments' => function ($query) {
+            $query->where('status', 1);
+        }])->with(['category', 'user'])->where('status', 1);
+
+        if ($request->has('search') && $request->filled('search')) {
+            $blogs->where(function ($query) use ($request) {
+                $query->where('title', 'like', '%' . $request->search . '%')
+                    ->orWhere('description', 'like', '%' . $request->search . '%');
+            });
+        }
+
+        if ($request->has('category') && $request->filled('category')) {
+            $blogs->whereHas('category', function ($query) use ($request) {
+                $query->where('slug', $request->category);
+            });
+        }
+
+        $blogs = $blogs->latest()->paginate(9);
+        $categories = BlogCategory::where('status', 1)->get();
+        return view('frontend.pages.blog', compact('blogs', 'categories'));
+    }
+
+    function blogDetails(string $slug)
+    {
+        $blog = Blog::with(['user'])->where('slug', $slug)->where('status', 1)->firstOrFail();
+        $comments = $blog->comments()->where('status', 1)->orderBy('id', 'DESC')->paginate(20);
+
+        $latestBlogs = Blog::select('id', 'title', 'slug', 'created_at', 'image')
+            ->where('status', 1)
+            ->where('id', '!=', $blog->id)
+            ->latest()->take(5)->get();
+        $categories = BlogCategory::withCount(['blogs' => function ($query) {
+            $query->where('status', 1);
+        }])->where('status', 1)->get();
+
+        $nextBlog = Blog::select('id', 'title', 'slug', 'image')->where('id', '>', $blog->id)->orderBy('id', 'ASC')->first();
+        $previousBlog = Blog::select('id', 'title', 'slug', 'image')->where('id', '<', $blog->id)->orderBy('id', 'DESC')->first();
+
+
+        return view('frontend.pages.blog-details', compact('blog', 'latestBlogs', 'categories', 'nextBlog', 'previousBlog', 'comments'));
+    }
+
+    function blogCommentStore(Request $request, string $blog_id): RedirectResponse
+    {
+        $request->validate([
+            'comment' => ['required', 'max:500']
+        ]);
+
+        Blog::findOrFail($blog_id);
+
+        $comment = new BlogComment();
+        $comment->blog_id = $blog_id;
+        $comment->user_id = auth()->user()->id;
+        $comment->comment = $request->comment;
+        $comment->save();
+
+        toastr()->success('Comment submitted successfully and waiting to approve.');
+        return redirect()->back();
     }
 }

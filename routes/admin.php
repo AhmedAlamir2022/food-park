@@ -8,6 +8,8 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\AppDownloadSectionController;
 use App\Http\Controllers\Backend\BannerSliderController;
+use App\Http\Controllers\Backend\BlogCategoryController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChefController;
 use App\Http\Controllers\Backend\CounterController;
@@ -107,6 +109,16 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     /** Counter Routes */
     Route::get('counter', [CounterController::class, 'index'])->name('counter.index');
     Route::put('counter', [CounterController::class, 'update'])->name('counter.update');
+
+    /** Blogs Category Routes */
+    Route::resource('blog-category', BlogCategoryController::class);
+
+    /** Blogs Routes */
+    Route::get('blogs/comments', [BlogController::class, 'blogComment'])->name('blogs.comments.index');
+    Route::get('blogs/comments/{id}', [BlogController::class, 'commentStatusUpdate'])->name('blogs.comments.update');
+    Route::delete('blogs/comments/{id}', [BlogController::class, 'commentDestroy'])->name('blogs.comments.destroy');
+
+    Route::resource('blogs', BlogController::class);
 
 
     /** Payment Gateway Setting Routes */

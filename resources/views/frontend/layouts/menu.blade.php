@@ -20,6 +20,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('product.index') }}">Products</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('chef') }}">Chefs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('testimonial') }}">Testimonials</a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="chefs.html">chefs</a>
                 </li> --}}

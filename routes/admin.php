@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductGalleryController;
 use App\Http\Controllers\Backend\ProductOptionController;
 use App\Http\Controllers\Backend\ProductSizeController;
+use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\WhyChooseUsController;
 
 /** Admin Auth Routes */
@@ -97,6 +98,10 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     /** App Download Routes */
     Route::get('app-download', [AppDownloadSectionController::class, 'index'])->name('app-download.index');
     Route::post('app-download', [AppDownloadSectionController::class, 'store'])->name('app-download.store');
+
+    /** Testimonial Routes */
+    Route::put('testimonial-title-update', [TestimonialController::class, 'updateTitle'])->name('testimonial-title-update');
+    Route::resource('testimonial', TestimonialController::class);
 
 
     /** Payment Gateway Setting Routes */

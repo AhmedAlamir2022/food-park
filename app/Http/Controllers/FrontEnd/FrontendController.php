@@ -12,6 +12,7 @@ use App\Models\DailyOffer;
 use App\Models\Product;
 use App\Models\SectionTitle;
 use App\Models\Slider;
+use App\Models\Testimonial;
 use App\Models\WhyChooseUs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -37,6 +38,7 @@ class FrontendController extends Controller
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
         $bannerSliders = BannerSlider::where('status', 1)->latest()->take(10)->get();
         $chefs = Chef::where(['show_at_home' => 1, 'status' => 1])->get();
+        $testimonials = Testimonial::where(['show_at_home' => 1, 'status' => 1])->get();
         $appSection = AppDownloadSection::first();
         return view('frontend.home.index', compact(
             'sliders',
@@ -46,7 +48,8 @@ class FrontendController extends Controller
             'dailyOffers',
             'bannerSliders',
             'chefs',
-            'appSection'
+            'appSection',
+            'testimonials'
         ));
     }
 
@@ -65,9 +68,9 @@ class FrontendController extends Controller
             'chef_top_title',
             'chef_main_title',
             'chef_sub_title',
-            // 'testimonial_top_title',
-            // 'testimonial_main_title',
-            // 'testimonial_sub_title'
+            'testimonial_top_title',
+            'testimonial_main_title',
+            'testimonial_sub_title'
         ];
 
         return SectionTitle::whereIn('key', $keys)->pluck('value', 'key');

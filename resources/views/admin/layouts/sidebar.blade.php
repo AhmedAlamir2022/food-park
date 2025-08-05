@@ -217,8 +217,8 @@
                 </li>
                 <li class="{{ setSidebarActive(['admin.testimonial.*']) }}"><a class="nav-link"
                         href="{{ route('admin.testimonial.index') }}">Testimonial</a></li>
-                {{-- <li class="{{ setSidebarActive(['admin.counter.index']) }}"><a class="nav-link"
-                        href="{{ route('admin.counter.index') }}">Counter</a></li> --}}
+                <li class="{{ setSidebarActive(['admin.counter.index']) }}"><a class="nav-link"
+                        href="{{ route('admin.counter.index') }}">Counter</a></li>
 
             </ul>
         </li>

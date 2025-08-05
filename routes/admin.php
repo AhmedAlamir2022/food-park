@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\AppDownloadSectionController;
 use App\Http\Controllers\Backend\BannerSliderController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChefController;
+use App\Http\Controllers\Backend\CounterController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\DailyOfferController;
 use App\Http\Controllers\Backend\DeliveryAreaController;
@@ -102,6 +103,10 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     /** Testimonial Routes */
     Route::put('testimonial-title-update', [TestimonialController::class, 'updateTitle'])->name('testimonial-title-update');
     Route::resource('testimonial', TestimonialController::class);
+
+    /** Counter Routes */
+    Route::get('counter', [CounterController::class, 'index'])->name('counter.index');
+    Route::put('counter', [CounterController::class, 'update'])->name('counter.update');
 
 
     /** Payment Gateway Setting Routes */

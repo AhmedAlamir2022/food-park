@@ -222,7 +222,7 @@
                 </ul>
             </li>
 
-            {{-- <li
+            <li
             class="dropdown {{ setSidebarActive([
                 'admin.custom-page-builder.*',
                 'admin.about.index',
@@ -233,21 +233,21 @@
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-file-alt"></i>
                 <span>Pages </span></a>
             <ul class="dropdown-menu">
-                <li class="{{ setSidebarActive(['admin.custom-page-builder.*']) }}"><a class="nav-link"
-                        href="{{ route('admin.custom-page-builder.index') }}">Custom Page</a></li>
+                {{-- <li class="{{ setSidebarActive(['admin.custom-page-builder.*']) }}"><a class="nav-link"
+                        href="{{ route('admin.custom-page-builder.index') }}">Custom Page</a></li> --}}
 
                 <li class="{{ setSidebarActive(['admin.about.index']) }}"><a class="nav-link"
                         href="{{ route('admin.about.index') }}">About</a></li>
-                <li class="{{ setSidebarActive(['admin.privacy-policy.index']) }}"><a class="nav-link"
-                        href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
-                <li class="{{ setSidebarActive(['admin.trams-and-conditions.index']) }}"><a class="nav-link"
+                {{-- <li class="{{ setSidebarActive(['admin.privacy-policy.index']) }}"><a class="nav-link"
+                        href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li> --}}
+                {{-- <li class="{{ setSidebarActive(['admin.trams-and-conditions.index']) }}"><a class="nav-link"
                         href="{{ route('admin.trams-and-conditions.index') }}">Trams and
-                        Conditions</a></li>
-                <li class="{{ setSidebarActive(['admin.contact.index']) }}"><a class="nav-link"
-                        href="{{ route('admin.contact.index') }}">Contact</a></li>
+                        Conditions</a></li> --}}
+                {{-- <li class="{{ setSidebarActive(['admin.contact.index']) }}"><a class="nav-link"
+                        href="{{ route('admin.contact.index') }}">Contact</a></li> --}}
 
             </ul>
-        </li> --}}
+        </li>
 
             {{-- <li class="{{ setSidebarActive(['admin.news-letter.index']) }}"><a class="nav-link"
                 href="{{ route('admin.news-letter.index') }}"><i class="fas fa-newspaper"></i>

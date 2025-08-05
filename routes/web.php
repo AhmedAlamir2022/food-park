@@ -19,6 +19,9 @@ Route::get('/chef', [FrontendController::class, 'chef'])->name('chef');
 /** Testimonial page */
 Route::get('/testimonials', [FrontendController::class, 'testimonial'])->name('testimonial');
 
+/** About Routes */
+Route::get('/about', [FrontendController::class, 'about'])->name('about');
+
 /** Blogs Routes */
 Route::get('/blogs', [FrontendController::class, 'blog'])->name('blogs');
 Route::get('/blogs/{slug}', [FrontendController::class, 'blogDetails'])->name('blogs.details');

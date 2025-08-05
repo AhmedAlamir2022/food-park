@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\BannerSlider;
 use App\Models\Category;
+use App\Models\Chef;
 use App\Models\Coupon;
 use App\Models\DailyOffer;
 use App\Models\Product;
@@ -34,13 +35,15 @@ class FrontendController extends Controller
         $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(15)->get();
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
         $bannerSliders = BannerSlider::where('status', 1)->latest()->take(10)->get();
+        $chefs = Chef::where(['show_at_home' => 1, 'status' => 1])->get();
         return view('frontend.home.index', compact(
             'sliders',
             'whyChooseUs',
             'sectionTitles',
             'categories',
             'dailyOffers',
-            'bannerSliders'
+            'bannerSliders',
+            'chefs'
         ));
     }
 
@@ -56,9 +59,9 @@ class FrontendController extends Controller
             'daily_offer_top_title',
             'daily_offer_main_title',
             'daily_offer_sub_title',
-            // 'chef_top_title',
-            // 'chef_main_title',
-            // 'chef_sub_title',
+            'chef_top_title',
+            'chef_main_title',
+            'chef_sub_title',
             // 'testimonial_top_title',
             // 'testimonial_main_title',
             // 'testimonial_sub_title'

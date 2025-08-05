@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\BannerSliderController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ChefController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\DailyOfferController;
 use App\Http\Controllers\Backend\DeliveryAreaController;
@@ -87,6 +88,10 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
 
     /** Banner Slider Routes */
     Route::resource('banner-slider', BannerSliderController::class);
+
+    /** Chefs Routes */
+    Route::put('chefs-title-update', [ChefController::class, 'updateTitle'])->name('chefs-title-update');
+    Route::resource('chefs', ChefController::class);
 
 
     /** Payment Gateway Setting Routes */

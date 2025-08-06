@@ -147,7 +147,7 @@
         <a class="cart_view" href="{{ route('cart.index') }}"> view cart</a>
     </div>
 </div>
-{{-- @php
+@php
     $reservationTimes = \App\Models\ReservationTime::where('status', 1)->get();
 @endphp
 <div class="fp__reservation">
@@ -179,7 +179,7 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 @push('scripts')
     <script>

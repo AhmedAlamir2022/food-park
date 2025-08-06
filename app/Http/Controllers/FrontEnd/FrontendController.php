@@ -18,6 +18,7 @@ use App\Models\Coupon;
 use App\Models\DailyOffer;
 use App\Models\PrivacyPolicy;
 use App\Models\Product;
+use App\Models\Reservation;
 use App\Models\SectionTitle;
 use App\Models\Slider;
 use App\Models\Testimonial;
@@ -26,7 +27,9 @@ use App\Models\WhyChooseUs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\ValidationException;
 
 class FrontendController extends Controller
 {
@@ -147,6 +150,36 @@ class FrontendController extends Controller
         Mail::send(new ContactMail($request->name, $request->email, $request->subject, $request->message));
 
         return response(['status' => 'success', 'message' => 'Message Sent Successfully!']);
+    }
+
+    function reservation(Request $request) {
+        $request->validate([
+            'name' => ['required', 'max:255'],
+            'phone' => ['required', 'max:50'],
+            'date' => ['required', 'date'],
+            'time' => ['required'],
+            'persons' => ['required', 'numeric']
+        ]);
+
+        if(!Auth::check()){
+            throw ValidationException::withMessages(['Please Login to Request Reservation']);
+        }
+
+        $reservation = new Reservation();
+        $reservation->reservation_id = rand(0, 500000);
+        $reservation->user_id = auth()->user()->id;
+        $reservation->name = $request->name;
+        $reservation->phone = $request->phone;
+        $reservation->date = $request->date;
+        $reservation->time = $request->time;
+        $reservation->persons = $request->persons;
+        $reservation->status = 'pending';
+        $reservation->save();
+
+        toastr()->success('Request send successfully!');
+        return redirect()->back();
+
+        // return response(['status' => 'success', 'message' => 'Request send successfully']);
     }
 
     function privacyPolicy()

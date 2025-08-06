@@ -25,6 +25,8 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductGalleryController;
 use App\Http\Controllers\Backend\ProductOptionController;
 use App\Http\Controllers\Backend\ProductSizeController;
+use App\Http\Controllers\Backend\ReservationController;
+use App\Http\Controllers\Backend\ReservationTimeController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\TramsAndConditionController;
 use App\Http\Controllers\Backend\WhyChooseUsController;
@@ -138,6 +140,12 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     /** Contact Routes */
     Route::get('contact', [ContactController::class, 'index'])->name('contact.index');
     Route::put('contact', [ContactController::class, 'update'])->name('contact.update');
+
+    /** Reservation Routes */
+    Route::resource('reservation-time', ReservationTimeController::class);
+    Route::get('reservation', [ReservationController::class, 'index'])->name('reservation.index');
+    Route::post('reservation', [ReservationController::class, 'update'])->name('reservation.update');
+    Route::delete('reservation/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
     /** Payment Gateway Setting Routes */
     Route::get('/payment-gateway-setting', [PaymentGatewaySettingController::class, 'index'])->name('payment-setting.index');

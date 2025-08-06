@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\DeliveryArea;
 use App\Models\Order;
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -16,14 +17,19 @@ class DashboardController extends Controller
         $userAddresses = Address::with('deliveryArea')->where('user_id', auth()->id())->get();
 
         $orders = Order::with(['userAddress', 'orderItems'])->where('user_id', auth()->user()->id)->get();
-        // $reservations = Reservation::where('user_id', auth()->user()->id)->get();
+        $reservations = Reservation::where('user_id', auth()->user()->id)->get();
         // $reviews = ProductRating::where('user_id', auth()->user()->id)->get();
         // $wishlist = Wishlist::where('user_id', auth()->user()->id)->latest()->get();
         // $totalOrders = Order::where('user_id', auth()->user()->id)->count();
         // $totalCompleteOrders = Order::where('user_id', auth()->user()->id)->where('order_status', 'delivered')->count();
         // $totalCancelOrders = Order::where('user_id', auth()->user()->id)->where('order_status', 'declined')->count();
-        // dump($deliveryAreas);
-        return view('frontend.dashboard.index', compact('deliveryAreas', 'userAddresses', 'orders'));
+        
+        return view('frontend.dashboard.index', compact(
+            'deliveryAreas',
+            'userAddresses',
+            'orders',
+            'reservations'
+        ));
     }
 
     function createAddress(Request $request)

@@ -160,7 +160,7 @@
                 </ul>
             </li>
 
-            {{-- <li
+            <li
                 class="dropdown {{ setSidebarActive(['admin.reservation-time.*', 'admin.reservation.index']) }}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-chair"></i>
                     <span>Manage Reservations </span></a>
@@ -170,7 +170,7 @@
                     <li class="{{ setSidebarActive(['admin.reservation.index']) }}"><a class="nav-link"
                             href="{{ route('admin.reservation.index') }}">Reservation</a></li>
                 </ul>
-            </li> --}}
+            </li>
 
             {{-- @if (auth()->user()->id === 1)
                 <li class="{{ setSidebarActive(['admin.chat.index']) }}"><a class="nav-link"

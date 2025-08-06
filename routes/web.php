@@ -29,6 +29,9 @@ Route::post('/contact', [FrontendController::class, 'sendContactMessage'])->name
 /** Reservation Routes */
 Route::post('/reservation', [FrontendController::class, 'reservation'])->name('reservation.store');
 
+/** Newsletter Routes */
+Route::post('/subscribe-newsletter', [FrontendController::class, 'subscribeNewsletter'])->name('subscribe-newsletter');
+
 /** Privacy Policy Routes */
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy.index');
 

@@ -1,9 +1,8 @@
-{{-- @php
+@php
     $footerInfo = \App\Models\FooterInfo::first();
-    $footerMenuOne = Menu::getByName('footer_menu_one');
-    $footerMenuTwo = Menu::getByName('footer_menu_two');
-    $footerMenuThree = Menu::getByName('footer_menu_three');
-
+    // $footerMenuOne = Menu::getByName('footer_menu_one');
+    // $footerMenuTwo = Menu::getByName('footer_menu_two');
+    // $footerMenuThree = Menu::getByName('footer_menu_three');
 @endphp
 
 <footer>
@@ -35,9 +34,10 @@
                     <div class="fp__footer_content">
                         <h3>Short Link</h3>
                         <ul>
-                            @foreach ($footerMenuOne as $menuItem)
-                                <li><a href="{{ $menuItem['link'] }}">{{ $menuItem['label'] }}</a></li>
-                            @endforeach
+                            <li><a href="{{ url('/') }}">Home</a></li>
+                            <li><a href="{{ route('about') }}">About Us</a></li>
+                            <li><a href="{{ route('contact.index') }}">Contact Us</a></li>
+                            <li><a href="{{ route('chef') }}">Chefs</a></li>
                         </ul>
                     </div>
                 </div>
@@ -45,9 +45,10 @@
                     <div class="fp__footer_content">
                         <h3>Help Link</h3>
                         <ul>
-                            @foreach ($footerMenuTwo as $menuItem)
-                                <li><a href="{{ $menuItem['link'] }}">{{ $menuItem['label'] }}</a></li>
-                            @endforeach
+                            <li><a href="{{ route('product.index') }}">Products</a></li>
+                            <li><a href="{{ route('testimonial') }}">Testimonials</a></li>
+                            <li><a href="{{ route('privacy-policy.index') }}">Privacy Policy</a></li>
+                            <li><a href="{{ route('trams-and-conditions') }}">Terms & Conditions</a></li>
                         </ul>
                     </div>
                 </div>
@@ -85,9 +86,9 @@
                             <p>{{ @$footerInfo->copyright }}</p>
                         @endif
                         <ul class="d-flex flex-wrap">
-                            @foreach ($footerMenuThree as $menuItem)
-                                <li><a href="{{ $menuItem['link'] }}">{{ $menuItem['label'] }}</a></li>
-                            @endforeach
+                            <li><a href="{{ route('privacy-policy.index') }}">Privacy Policy</a></li>
+                            <li><a href="{{ route('trams-and-conditions') }}">Terms & Conditions</a></li>
+                           
                         </ul>
                     </div>
                 </div>
@@ -110,7 +111,7 @@
                         $('.subscribe_btn').attr('disabled', true);
                         $('.subscribe_btn').html(
                             '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
-                            );
+                        );
                     },
                     success: function(response) {
                         $('.subscribe_form').trigger("reset");
@@ -128,7 +129,7 @@
                         $('.subscribe_btn').attr('disabled', true);
                         $('.subscribe_btn').html(
                             '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>'
-                            );
+                        );
                     },
                     complete: function() {
                         $('.subscribe_btn').attr('disabled', false);
@@ -138,4 +139,4 @@
             })
         })
     </script>
-@endpush --}}
+@endpush

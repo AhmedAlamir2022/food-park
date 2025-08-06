@@ -17,7 +17,9 @@ use App\Http\Controllers\Backend\CounterController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\DailyOfferController;
 use App\Http\Controllers\Backend\DeliveryAreaController;
+use App\Http\Controllers\Backend\FooterInfoController;
 use App\Http\Controllers\Backend\MenuBuilderController;
+use App\Http\Controllers\Backend\NewsLetterController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentGatewaySettingController;
 use App\Http\Controllers\Backend\PrivacyPolicyController;
@@ -27,6 +29,7 @@ use App\Http\Controllers\Backend\ProductOptionController;
 use App\Http\Controllers\Backend\ProductSizeController;
 use App\Http\Controllers\Backend\ReservationController;
 use App\Http\Controllers\Backend\ReservationTimeController;
+use App\Http\Controllers\Backend\SocialLinkController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\TramsAndConditionController;
 use App\Http\Controllers\Backend\WhyChooseUsController;
@@ -146,6 +149,17 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::get('reservation', [ReservationController::class, 'index'])->name('reservation.index');
     Route::post('reservation', [ReservationController::class, 'update'])->name('reservation.update');
     Route::delete('reservation/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+
+    /** News letter Routes */
+    Route::get('news-letter', [NewsLetterController::class, 'index'])->name('news-letter.index');
+    Route::post('news-letter', [NewsLetterController::class, 'sendNewsLetter'])->name('news-letter.send');
+
+    /** Social Links Routes */
+    Route::resource('social-link', SocialLinkController::class);
+
+    /** Footer Routes */
+    Route::get('footer-info', [FooterInfoController::class, 'index'])->name('footer-info.index');
+    Route::put('footer-info', [FooterInfoController::class, 'update'])->name('footer-info.update');
 
     /** Payment Gateway Setting Routes */
     Route::get('/payment-gateway-setting', [PaymentGatewaySettingController::class, 'index'])->name('payment-setting.index');

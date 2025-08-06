@@ -249,17 +249,17 @@
             </ul>
         </li>
 
-            {{-- <li class="{{ setSidebarActive(['admin.news-letter.index']) }}"><a class="nav-link"
+            <li class="{{ setSidebarActive(['admin.news-letter.index']) }}"><a class="nav-link"
                 href="{{ route('admin.news-letter.index') }}"><i class="fas fa-newspaper"></i>
-                <span>News Letter</span></a></li> --}}
+                <span>News Letter</span></a></li>
 
-            {{-- <li class="{{ setSidebarActive(['admin.social-link.*']) }}"><a class="nav-link"
+            <li class="{{ setSidebarActive(['admin.social-link.*']) }}"><a class="nav-link"
                 href="{{ route('admin.social-link.index') }}"><i class="fas fa-link"></i>
-                <span>Social Links</span></a></li> --}}
+                <span>Social Links</span></a></li>
 
-            {{-- <li class="{{ setSidebarActive(['admin.footer-info.index']) }}"><a class="nav-link"
+            <li class="{{ setSidebarActive(['admin.footer-info.index']) }}"><a class="nav-link"
                 href="{{ route('admin.footer-info.index') }}"> <i class="fas fa-info-circle"></i> <span>Footer
-                    Info</span></a></li> --}}
+                    Info</span></a></li>
 
 
 

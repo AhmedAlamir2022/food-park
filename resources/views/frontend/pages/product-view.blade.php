@@ -168,7 +168,7 @@
                                 <div class="fp__review_area">
                                     <div class="row">
                                         <div class="col-lg-8">
-                                            {{-- <h4>{{ count($reviews) }} reviews</h4>
+                                            <h4>{{ count($reviews) }} reviews</h4>
                                             <div class="fp__comment pt-0 mt_20">
                                                 @foreach ($reviews as $review)
                                                     <div class="fp__single_comment m-0 border-0">
@@ -202,11 +202,11 @@
                                                     <div class="alert alert-warning mt-4">No review found!</div>
                                                 @endif
 
-                                            </div> --}}
+                                            </div>
 
                                         </div>
                                         @auth
-                                            {{-- <div class="col-lg-4">
+                                            <div class="col-lg-4">
                                                 <div class="fp__post_review">
                                                     <h4>write a Review</h4>
                                                     <form action="{{ route('product-review.store') }}" method="POST">
@@ -237,7 +237,7 @@
                                                         </div>
                                                     </form>
                                                 </div>
-                                            </div> --}}
+                                            </div>
                                         @else
                                             <div class="col-lg-4">
                                                 <h4>write a Review</h4>

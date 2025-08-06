@@ -26,6 +26,7 @@ use App\Http\Controllers\Backend\PrivacyPolicyController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductGalleryController;
 use App\Http\Controllers\Backend\ProductOptionController;
+use App\Http\Controllers\Backend\ProductReviewController;
 use App\Http\Controllers\Backend\ProductSizeController;
 use App\Http\Controllers\Backend\ReservationController;
 use App\Http\Controllers\Backend\ReservationTimeController;
@@ -76,6 +77,11 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
 
     /** Coupon Routes */
     Route::resource('coupon', CouponController::class);
+
+    /** Product Reviews Routes */
+    Route::get('product-reviews', [ProductReviewController::class, 'index'])->name('product-reviews.index');
+    Route::post('product-reviews', [ProductReviewController::class, 'updateStatus'])->name('product-reviews.update');
+    Route::delete('product-reviews/{id}', [ProductReviewController::class, 'destroy'])->name('product-reviews.destroy');
 
     /** Delivery Area Routes */
     Route::resource('delivery-area', DeliveryAreaController::class);

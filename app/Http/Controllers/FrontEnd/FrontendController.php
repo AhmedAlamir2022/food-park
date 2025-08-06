@@ -18,6 +18,7 @@ use App\Models\Coupon;
 use App\Models\DailyOffer;
 use App\Models\PrivacyPolicy;
 use App\Models\Product;
+use App\Models\ProductRating;
 use App\Models\Reservation;
 use App\Models\SectionTitle;
 use App\Models\Slider;
@@ -154,7 +155,8 @@ class FrontendController extends Controller
         return response(['status' => 'success', 'message' => 'Message Sent Successfully!']);
     }
 
-    function reservation(Request $request) {
+    function reservation(Request $request)
+    {
         $request->validate([
             'name' => ['required', 'max:255'],
             'phone' => ['required', 'max:50'],
@@ -163,7 +165,7 @@ class FrontendController extends Controller
             'persons' => ['required', 'numeric']
         ]);
 
-        if(!Auth::check()){
+        if (!Auth::check()) {
             throw ValidationException::withMessages(['Please Login to Request Reservation']);
         }
 
@@ -184,7 +186,7 @@ class FrontendController extends Controller
         // return response(['status' => 'success', 'message' => 'Request send successfully']);
     }
 
-    function subscribeNewsletter(Request $request) : Response
+    function subscribeNewsletter(Request $request): Response
     {
         $request->validate([
             'email' => ['required', 'email', 'max:255', 'unique:subscribers,email']
@@ -217,17 +219,20 @@ class FrontendController extends Controller
             'productSizes',
             'productOptions'
         ])->where(['slug' => $slug, 'status' => 1])
-            // ->withAvg('reviews', 'rating')
-            // ->withCount('reviews')
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
             ->firstOrFail();
 
-        $relatedProducts = Product::where('category_id', $product->category_id)
+        $relatedProducts = Product::with([
+            'productSizes',
+            'productOptions'
+        ])->where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)->take(8)
-            // ->withAvg('reviews', 'rating')
-            // ->withCount('reviews')
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
             ->latest()->get();
-        // $reviews = ProductRating::where(['product_id' => $product->id, 'status' => 1])->paginate(30);
-        return view('frontend.pages.product-view', compact('product', 'relatedProducts'));
+        $reviews = ProductRating::where(['product_id' => $product->id, 'status' => 1])->paginate(30);
+        return view('frontend.pages.product-view', compact('product', 'relatedProducts', 'reviews'));
     }
 
     function products(Request $request)
@@ -250,8 +255,8 @@ class FrontendController extends Controller
 
         $products = $products
             ->with('category')
-            // ->withAvg('reviews', 'rating')
-            // ->withCount('reviews')
+            ->withAvg('reviews', 'rating')
+            ->withCount('reviews')
             ->paginate(12);
 
         $categories = Category::where('status', 1)->get();
@@ -264,6 +269,44 @@ class FrontendController extends Controller
         $product = Product::with(['productSizes', 'productOptions'])->findOrFail($productId);
 
         return view('frontend.layouts.ajax-files.product-popup-modal', compact('product'))->render();
+    }
+
+    function productReviewStore(Request $request) {
+        $request->validate([
+            'rating' => ['required', 'min:1', 'max:5', 'integer'],
+            'review' => ['required', 'max:500'],
+            'product_id' => ['required', 'integer']
+        ]);
+
+        $user = Auth::user();
+
+        $hasPurchased = $user->orders()->whereHas('orderItems', function($query) use ($request){
+            $query->where('product_id', $request->product_id);
+        })
+        ->where('order_status', 'delivered')
+        ->get();
+
+
+        if(count($hasPurchased) == 0){
+            throw ValidationException::withMessages(['Please Buy The Product Before Submit a Review!']);
+        }
+
+        $alreadyReviewed = ProductRating::where(['user_id' => $user->id, 'product_id' => $request->product_id])->exists();
+        if($alreadyReviewed){
+            throw ValidationException::withMessages(['You already reviewed this product']);
+        }
+
+        $review = new ProductRating();
+        $review->user_id = $user->id;
+        $review->product_id = $request->product_id;
+        $review->rating = $request->rating;
+        $review->review = $request->review;
+        $review->status = 0;
+        $review->save();
+
+        toastr()->success('Review added successfully and waiting to approve');
+
+        return redirect()->back();
     }
 
     function applyCoupon(Request $request)

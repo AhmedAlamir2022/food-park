@@ -19,11 +19,13 @@ use App\Http\Controllers\Backend\DeliveryAreaController;
 use App\Http\Controllers\Backend\MenuBuilderController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\PaymentGatewaySettingController;
+use App\Http\Controllers\Backend\PrivacyPolicyController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductGalleryController;
 use App\Http\Controllers\Backend\ProductOptionController;
 use App\Http\Controllers\Backend\ProductSizeController;
 use App\Http\Controllers\Backend\TestimonialController;
+use App\Http\Controllers\Backend\TramsAndConditionController;
 use App\Http\Controllers\Backend\WhyChooseUsController;
 
 /** Admin Auth Routes */
@@ -123,6 +125,15 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     /** About Routes */
     Route::get('about', [AboutController::class, 'index'])->name('about.index');
     Route::put('about', [AboutController::class, 'update'])->name('about.update');
+
+    /** privacy policy Routes */
+    Route::get('privacy-policy', [PrivacyPolicyController::class, 'index'])->name('privacy-policy.index');
+    Route::put('privacy-policy', [PrivacyPolicyController::class, 'update'])->name('privacy-policy.update');
+
+    /** privacy policy Routes */
+    Route::get('trams-and-conditions', [TramsAndConditionController::class, 'index'])->name('trams-and-conditions.index');
+    Route::put('trams-and-conditions', [TramsAndConditionController::class, 'update'])->name('trams-and-conditions.update');
+
 
 
     /** Payment Gateway Setting Routes */

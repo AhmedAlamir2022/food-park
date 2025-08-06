@@ -238,11 +238,11 @@
 
                 <li class="{{ setSidebarActive(['admin.about.index']) }}"><a class="nav-link"
                         href="{{ route('admin.about.index') }}">About</a></li>
-                {{-- <li class="{{ setSidebarActive(['admin.privacy-policy.index']) }}"><a class="nav-link"
-                        href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li> --}}
-                {{-- <li class="{{ setSidebarActive(['admin.trams-and-conditions.index']) }}"><a class="nav-link"
+                <li class="{{ setSidebarActive(['admin.privacy-policy.index']) }}"><a class="nav-link"
+                        href="{{ route('admin.privacy-policy.index') }}">Privacy Policy</a></li>
+                <li class="{{ setSidebarActive(['admin.trams-and-conditions.index']) }}"><a class="nav-link"
                         href="{{ route('admin.trams-and-conditions.index') }}">Trams and
-                        Conditions</a></li> --}}
+                        Conditions</a></li>
                 {{-- <li class="{{ setSidebarActive(['admin.contact.index']) }}"><a class="nav-link"
                         href="{{ route('admin.contact.index') }}">Contact</a></li> --}}
 

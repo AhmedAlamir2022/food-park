@@ -26,6 +26,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('testimonial') }}">Testimonials</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('privacy-policy.index') }}">Privacy Policy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('trams-and-conditions') }}">Terms & Conditions</a>
+                </li>
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="chefs.html">chefs</a>
                 </li> --}}

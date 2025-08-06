@@ -22,6 +22,10 @@ Route::get('/testimonials', [FrontendController::class, 'testimonial'])->name('t
 /** About Routes */
 Route::get('/about', [FrontendController::class, 'about'])->name('about');
 
+/** Contact Routes */
+Route::get('/contact', [FrontendController::class, 'contact'])->name('contact.index');
+Route::post('/contact', [FrontendController::class, 'sendContactMessage'])->name('contact.send-message');
+
 /** Privacy Policy Routes */
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy'])->name('privacy-policy.index');
 

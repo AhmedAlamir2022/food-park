@@ -243,8 +243,8 @@
                 <li class="{{ setSidebarActive(['admin.trams-and-conditions.index']) }}"><a class="nav-link"
                         href="{{ route('admin.trams-and-conditions.index') }}">Trams and
                         Conditions</a></li>
-                {{-- <li class="{{ setSidebarActive(['admin.contact.index']) }}"><a class="nav-link"
-                        href="{{ route('admin.contact.index') }}">Contact</a></li> --}}
+                <li class="{{ setSidebarActive(['admin.contact.index']) }}"><a class="nav-link"
+                        href="{{ route('admin.contact.index') }}">Contact</a></li>
 
             </ul>
         </li>

@@ -49,7 +49,7 @@
 
                             @include('admin.setting.sections.appearance-setting')
 
-                            {{-- @include('admin.setting.sections.pusher-setting') --}}
+                            @include('admin.setting.sections.pusher-setting')
 
                             @include('admin.setting.sections.mail-setting')
 

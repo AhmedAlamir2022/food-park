@@ -95,7 +95,7 @@ class CouponController extends Controller
         $coupon->status = $request->status;
         $coupon->save();
 
-        toastr()->success('Created Successfully');
+        toastr()->info('Updated Successfully');
 
         return to_route('admin.coupon.index');
     }
@@ -108,7 +108,7 @@ class CouponController extends Controller
         try {
             Coupon::findOrFail($id)->delete();
 
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

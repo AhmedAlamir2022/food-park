@@ -75,7 +75,7 @@ class BlogCategoryController extends Controller
         $category->status = $request->status;
         $category->save();
 
-        toastr()->success('Update Successfully!');
+        toastr()->info('Update Successfully!');
 
         return to_route('admin.blog-category.index');
     }
@@ -88,7 +88,7 @@ class BlogCategoryController extends Controller
         try {
             $category = BlogCategory::findOrFail($id);
             $category->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

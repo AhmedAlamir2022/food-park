@@ -82,7 +82,7 @@ class DailyOfferController extends Controller
         $offer->status = $request->status;
         $offer->save();
 
-        toastr()->success('Updated Successfully');
+        toastr()->info('Updated Successfully');
 
         return to_route('admin.daily-offer.index');
     }
@@ -115,7 +115,7 @@ class DailyOfferController extends Controller
         try {
             $dailyOffer = DailyOffer::findOrFail($id);
             $dailyOffer->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

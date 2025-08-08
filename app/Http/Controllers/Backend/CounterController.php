@@ -63,7 +63,7 @@ class CounterController extends Controller
             ]
         );
 
-        toastr()->success('Updated Successfully!');
+        toastr()->info('Updated Successfully!');
 
         return redirect()->back();
     }

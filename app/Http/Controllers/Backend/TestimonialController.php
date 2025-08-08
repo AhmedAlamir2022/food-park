@@ -118,7 +118,7 @@ class TestimonialController extends Controller
                 ['value' => $value]
             );
         }
-        toastr()->success('Updated Successfully!');
+        toastr()->info('Updated Successfully!');
         return redirect()->back();
     }
 
@@ -131,7 +131,7 @@ class TestimonialController extends Controller
             $testimonial = Testimonial::findOrFail($id);
             $this->removeImage($testimonial->image);
             $testimonial->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

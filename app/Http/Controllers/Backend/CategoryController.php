@@ -82,7 +82,7 @@ class CategoryController extends Controller
         $category->status = $request->status;
         $category->save();
 
-        toastr()->success('Updated Successfully');
+        toastr()->info('Updated Successfully');
 
         return to_route('admin.category.index');
     }
@@ -94,7 +94,7 @@ class CategoryController extends Controller
     {
         try {
             Category::findOrFail($id)->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

@@ -50,7 +50,7 @@ class ReservationTimeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) 
+    public function edit(string $id)
     {
         $time = ReservationTime::findOrFail($id);
         return view('admin.reservation.reservation-time.edit', compact('time'));
@@ -71,7 +71,7 @@ class ReservationTimeController extends Controller
         $time->start_time = $request->start_time;
         $time->end_time = $request->end_time;
         $time->save();
-        toastr()->success('Created Successfully!');
+        toastr()->info('Created Successfully!');
 
         return redirect()->route('admin.reservation-time.index');
     }
@@ -84,7 +84,7 @@ class ReservationTimeController extends Controller
         try {
             $time = ReservationTime::findOrFail($id);
             $time->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

@@ -98,7 +98,7 @@ class SliderController extends Controller
         $slider->status = $request->status;
         $slider->save();
 
-        toastr()->success('Updated Successfully');
+        toastr()->info('Updated Successfully');
 
         return to_route('admin.slider.index');
     }

@@ -104,7 +104,7 @@ class ProductController extends Controller
         $product->status = $request->status;
         $product->save();
 
-        toastr()->success('Update Successfully');
+        toastr()->info('Update Successfully');
 
         return to_route('admin.product.index');
     }
@@ -119,7 +119,7 @@ class ProductController extends Controller
             $this->removeImage($product->thumb_image);
             $product->delete();
 
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }
@@ -148,7 +148,7 @@ class ProductController extends Controller
             ['value' => $request->product_sub_title]
         );
 
-        toastr()->success('Updated Successfully!');
+        toastr()->info('Updated Successfully!');
 
         return redirect()->back();
     }

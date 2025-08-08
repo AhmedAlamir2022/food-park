@@ -20,7 +20,7 @@ class ReservationController extends Controller
         $reservation = Reservation::findOrFail($request->id);
         $reservation->status = $request->status;
         $reservation->save();
-        return response(['status' => 'success', 'message' => 'updated successfully!']);
+        return response(['status' => 'info', 'message' => 'updated successfully!']);
     }
 
     function destroy(string $id): Response
@@ -28,7 +28,7 @@ class ReservationController extends Controller
         try {
             $reservation = Reservation::findOrFail($id);
             $reservation->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

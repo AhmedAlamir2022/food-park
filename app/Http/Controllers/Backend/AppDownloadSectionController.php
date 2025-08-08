@@ -45,7 +45,7 @@ class AppDownloadSectionController extends Controller
 
         );
 
-        toastr()->success('Updated Successfully!');
+        toastr()->info('Updated Successfully!');
 
         return to_route('admin.app-download.index');
     }

@@ -71,7 +71,7 @@ class OrderController extends Controller
         if ($request->ajax()) {
             return response(['message' => 'Order Status Updated!']);
         } else {
-            toastr()->success('Status Updated Successfully!');
+            toastr()->info('Status Updated Successfully!');
 
             return redirect()->back();
         }
@@ -82,7 +82,7 @@ class OrderController extends Controller
         try {
             $order = Order::findOrFail($id);
             $order->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             logger($e);
             return response(['status' => 'error', 'message' => 'something went wrong!']);

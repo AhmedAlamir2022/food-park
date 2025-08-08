@@ -109,7 +109,7 @@ class ChefController extends Controller
         $chef->status = $request->status;
         $chef->save();
 
-        toastr()->success('Update Successfully!');
+        toastr()->info('Update Successfully!');
 
         return to_route('admin.chefs.index');
     }
@@ -143,7 +143,7 @@ class ChefController extends Controller
             $chef = Chef::findOrFail($id);
             $this->removeImage($chef->image);
             $chef->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

@@ -54,7 +54,7 @@ class ProductSizeController extends Controller
             $size = ProductSize::findOrFail($id);
             $size->delete();
 
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

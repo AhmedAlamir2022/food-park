@@ -33,7 +33,7 @@ class ProfileController extends Controller
         $user->avatar = isset($imagePath) ? $imagePath : $user->avatar;
         $user->save();
 
-        toastr('Updated Successfully!', 'success');
+        toastr('Updated Successfully!', 'info');
 
         return redirect()->back();
     }
@@ -49,7 +49,7 @@ class ProfileController extends Controller
         $user = Auth::user();
         $user->password = bcrypt($request->password);
         $user->save();
-        toastr()->success('Password Updated Successfully');
+        toastr()->info('Password Updated Successfully');
 
         return redirect()->back();
     }

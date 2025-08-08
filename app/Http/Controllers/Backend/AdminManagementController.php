@@ -88,7 +88,7 @@ class AdminManagementController extends Controller
         $user->role = $request->role;
         $user->save();
 
-        toastr()->success('Updated Successfully');
+        toastr()->info('Updated Successfully');
 
         return to_route('admin.admin-management.index');
     }
@@ -104,7 +104,7 @@ class AdminManagementController extends Controller
         try {
             $admin = User::findOrFail($id);
             $admin->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'Something Went Wrong!']);
         }

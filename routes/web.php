@@ -115,6 +115,9 @@ Route::group(['middleware' => 'auth', 'role:user'], function () {
     // Route::get('paymob/cancel', [PaymentController::class, 'paymobCancel'])->name('paymob.cancel');
 });
 
+Route::group(['middleware' => 'auth'], function () {
+});
+
 require __DIR__ . '/auth.php';
 
 

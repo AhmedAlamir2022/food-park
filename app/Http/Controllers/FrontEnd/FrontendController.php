@@ -222,7 +222,8 @@ class FrontendController extends Controller
         $product = Product::with([
             'productImages',
             'productSizes',
-            'productOptions'
+            'productOptions',
+            'category',
         ])->where(['slug' => $slug, 'status' => 1])
             ->withAvg('reviews', 'rating')
             ->withCount('reviews')
@@ -230,7 +231,9 @@ class FrontendController extends Controller
 
         $relatedProducts = Product::with([
             'productSizes',
-            'productOptions'
+            'productOptions',
+            'productImages',
+            'category'
         ])->where('category_id', $product->category_id)
             ->where('id', '!=', $product->id)->take(8)
             ->withAvg('reviews', 'rating')
@@ -310,7 +313,7 @@ class FrontendController extends Controller
         $review->status = 0;
         $review->save();
 
-        toastr()->success('Review added successfully and waiting to approve');
+        toastr()->warning('Review added successfully and waiting to approve');
 
         return redirect()->back();
     }

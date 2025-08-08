@@ -38,7 +38,7 @@ class ContactController extends Controller
             ]
         );
 
-        toastr()->success('Created Successfully');
+        toastr()->info('Updated Successfully');
 
         return redirect()->back();
     }

@@ -122,7 +122,7 @@ class CartController extends Controller
     {
         Cart::destroy();
         session()->forget('coupon');
-        toastr()->success('All items had been removed from card!');
+        toastr()->info('All items had been removed from card!');
         return redirect()->back();
     }
 }

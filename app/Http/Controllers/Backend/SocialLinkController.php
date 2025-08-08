@@ -78,7 +78,7 @@ class SocialLinkController extends Controller
         $link->status = $request->status;
         $link->save();
 
-        toastr()->success('Update Successfully');
+        toastr()->info('Update Successfully');
 
         return redirect()->route('admin.social-link.index');
     }

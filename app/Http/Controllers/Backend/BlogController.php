@@ -106,7 +106,7 @@ class BlogController extends Controller
         $blog->status = $request->status;
         $blog->save();
 
-        toastr()->success('Updated Successfully');
+        toastr()->success('info Successfully');
 
         return to_route('admin.blogs.index');
     }
@@ -120,7 +120,7 @@ class BlogController extends Controller
             $blog = Blog::findOrFail($id);
             $this->removeImage($blog->image);
             $blog->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'info', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }
@@ -139,7 +139,7 @@ class BlogController extends Controller
         $comment->status = !$comment->status;
         $comment->save();
 
-        toastr()->success('Updated Successfully');
+        toastr()->info('Updated Successfully');
         return redirect()->back();
     }
 
@@ -148,7 +148,7 @@ class BlogController extends Controller
         try {
             $comment = BlogComment::findOrFail($id);
             $comment->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'success', 'info' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

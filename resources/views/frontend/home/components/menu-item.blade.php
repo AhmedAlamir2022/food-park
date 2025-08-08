@@ -61,8 +61,8 @@
                                             <i class="fas fa-shopping-basket"></i>
                                         </a>
                                     </li>
-                                    <li onclick="addToWishlist('{{ $product->id }}')">
-                                        <a href="javascript:;"><i class="fal fa-heart"></i></a>
+                                    <li onclick="addToWishlist('{{ $product->id }}')"><a href="javascript:;"><i
+                                                class="fal fa-heart"></i></a></li>
                                     </li>
                                     <li>
                                         <a href="{{ route('product.show', $product->slug) }}">

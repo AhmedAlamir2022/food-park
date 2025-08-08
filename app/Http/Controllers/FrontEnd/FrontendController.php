@@ -51,7 +51,12 @@ class FrontendController extends Controller
                     ->with('category'); // optional, if needed
             }])
             ->get();
-        $dailyOffers = DailyOffer::with('product')->where('status', 1)->take(15)->get();
+        $dailyOffers = DailyOffer::with('product')
+            ->with('product')
+            ->where('status', 1)
+            ->take(15)
+            ->get();
+
         $whyChooseUs = WhyChooseUs::where('status', 1)->get();
         $bannerSliders = BannerSlider::where('status', 1)->latest()->take(10)->get();
         $chefs = Chef::where(['show_at_home' => 1, 'status' => 1])->get();
@@ -271,7 +276,8 @@ class FrontendController extends Controller
         return view('frontend.layouts.ajax-files.product-popup-modal', compact('product'))->render();
     }
 
-    function productReviewStore(Request $request) {
+    function productReviewStore(Request $request)
+    {
         $request->validate([
             'rating' => ['required', 'min:1', 'max:5', 'integer'],
             'review' => ['required', 'max:500'],
@@ -280,19 +286,19 @@ class FrontendController extends Controller
 
         $user = Auth::user();
 
-        $hasPurchased = $user->orders()->whereHas('orderItems', function($query) use ($request){
+        $hasPurchased = $user->orders()->whereHas('orderItems', function ($query) use ($request) {
             $query->where('product_id', $request->product_id);
         })
-        ->where('order_status', 'delivered')
-        ->get();
+            ->where('order_status', 'delivered')
+            ->get();
 
 
-        if(count($hasPurchased) == 0){
+        if (count($hasPurchased) == 0) {
             throw ValidationException::withMessages(['Please Buy The Product Before Submit a Review!']);
         }
 
         $alreadyReviewed = ProductRating::where(['user_id' => $user->id, 'product_id' => $request->product_id])->exists();
-        if($alreadyReviewed){
+        if ($alreadyReviewed) {
             throw ValidationException::withMessages(['You already reviewed this product']);
         }
 

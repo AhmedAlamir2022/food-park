@@ -16,7 +16,7 @@
                             <h4>Todays Orders</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ $todaysOrders }} --}}
+                            {{ $todaysOrders }}
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                             <h4>Todays Earnings</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ currencyPosition($todaysEarnings) }} --}}
+                            {{ currencyPosition($todaysEarnings) }}
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                             <h4>This Month Orders</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ $thisMonthsOrders }} --}}
+                            {{ $thisMonthsOrders }}
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@
                             <h4>This Months Earnings</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ currencyPosition($thisMonthsEarnings) }} --}}
+                            {{ currencyPosition($thisMonthsEarnings) }}
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                             <h4>This Year Orders</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ $thisYearOrders }} --}}
+                            {{ $thisYearOrders }}
                         </div>
                     </div>
                 </div>
@@ -96,7 +96,7 @@
                             <h4>This Year Earnings</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ currencyPosition($thisYearEarnings) }} --}}
+                            {{ currencyPosition($thisYearEarnings) }}
                         </div>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                             <h4>Total Orders</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ $totalOrders }} --}}
+                            {{ $totalOrders }}
                         </div>
                     </div>
                 </div>
@@ -128,7 +128,7 @@
                             <h4>Total Earnings</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ currencyPosition($totalEarnings) }} --}}
+                            {{ currencyPosition($totalEarnings) }}
                         </div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                             <h4>Total Users</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ $totalUsers }} --}}
+                            {{ $totalUsers }}
                         </div>
                     </div>
                 </div>
@@ -160,7 +160,7 @@
                             <h4>Total Admins</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ $totalAdmins }} --}}
+                            {{ $totalAdmins }}
                         </div>
                     </div>
                 </div>
@@ -176,7 +176,7 @@
                             <h4>Total Products</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ $totalProducts }} --}}
+                            {{ $totalProducts }}
                         </div>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
                             <h4>Total Blogs</h4>
                         </div>
                         <div class="card-body">
-                            {{-- {{ $totalBlogs }} --}}
+                            {{ $totalBlogs }}
                         </div>
                     </div>
                 </div>
@@ -209,7 +209,78 @@
                 <h4>Todays Orders</h4>
             </div>
             <div class="card-body">
-                {{-- {{ $dataTable->table() }} --}}
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-2">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Invoice ID</th>
+                                <th>Customer</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th>Payment Method</th>
+                                <th>Payment Status</th>
+                                <th>Order Status</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @forelse ($todaysOrdersRows as $order)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $order->invoice_id }}</td>
+                                    <td>{{ $order->user->name }}</td>
+                                    <td>{{ $order->product_qty }}</td>
+                                    <td>{{ $order->grand_total . ' ' . strtoupper($order->currency_name) }}</td>
+                                    <td>{{ $order->payment_method }}</td>
+                                    <td>{{ $order->payment_status }}</td>
+                                    <td>
+                                        @if ($order->order_status === 'delivered')
+                                            <span class="badge badge-success">Delivered</span>
+                                        @elseif ($order->order_status === 'declined')
+                                            <span class="badge badge-danger">Declined</span>
+                                        @else
+                                            <span class="badge badge-warning">{{ ucfirst($order->order_status) }}</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        {{ $order->created_at->format('M d,Y') }}
+
+                                    </td>
+                                    <td>
+                                        {{ $order->updated_at->diffForHumans() }}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.orders.show', $order->id) }}" class="btn btn-primary">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        <a href="javascript:;" class="btn btn-warning ml-2 order_status_btn"
+                                            data-id="{{ $order->id }}" data-toggle="modal" data-target="#order_modal">
+                                            <i class="fas fa-truck-loading"></i>
+                                        </a>
+
+                                        <a href="{{ route('admin.orders.destroy', $order->id) }}"
+                                            class="btn btn-danger delete-item ml-2">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="12" class="text-center">No orders found</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+
+                    </table>
+                    {{ $todaysOrdersRows->links() }}
+                </div>
             </div>
         </div>
     </section>

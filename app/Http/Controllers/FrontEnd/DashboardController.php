@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Address;
 use App\Models\DeliveryArea;
 use App\Models\Order;
+use App\Models\ProductRating;
 use App\Models\Reservation;
+use App\Models\Wishlist;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -18,17 +20,24 @@ class DashboardController extends Controller
 
         $orders = Order::with(['userAddress', 'orderItems'])->where('user_id', auth()->user()->id)->get();
         $reservations = Reservation::where('user_id', auth()->user()->id)->get();
-        // $reviews = ProductRating::where('user_id', auth()->user()->id)->get();
-        // $wishlist = Wishlist::where('user_id', auth()->user()->id)->latest()->get();
-        // $totalOrders = Order::where('user_id', auth()->user()->id)->count();
-        // $totalCompleteOrders = Order::where('user_id', auth()->user()->id)->where('order_status', 'delivered')->count();
-        // $totalCancelOrders = Order::where('user_id', auth()->user()->id)->where('order_status', 'declined')->count();
-        
+        $reviews = ProductRating::with('user')->where('user_id', auth()->user()->id)->get();
+        $wishlist = Wishlist::with('product')->where('user_id', auth()->user()->id)->latest()->get();
+        $totalOrders = Order::where('user_id', auth()->user()->id)->count();
+        $totalCompleteOrders = Order::where('user_id', auth()->user()->id)->where('order_status', 'delivered')->count();
+        $totalCancelOrders = Order::where('user_id', auth()->user()->id)->where('order_status', 'declined')->count();
+        $totalPendingOrders = Order::where('user_id', auth()->user()->id)->where('order_status', 'pending')->count();
+
         return view('frontend.dashboard.index', compact(
             'deliveryAreas',
             'userAddresses',
             'orders',
-            'reservations'
+            'reservations',
+            'reviews',
+            'wishlist',
+            'totalOrders',
+            'totalCompleteOrders',
+            'totalCancelOrders',
+            'totalPendingOrders'
         ));
     }
 

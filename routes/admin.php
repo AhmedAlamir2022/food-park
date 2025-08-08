@@ -6,12 +6,14 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\ProfileController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\AdminAuthController;
+use App\Http\Controllers\Backend\AdminManagementController;
 use App\Http\Controllers\Backend\AppDownloadSectionController;
 use App\Http\Controllers\Backend\BannerSliderController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ChefController;
+use App\Http\Controllers\Backend\ClearDatabaseController;
 use App\Http\Controllers\Backend\ContactController;
 use App\Http\Controllers\Backend\CounterController;
 use App\Http\Controllers\Backend\CouponController;
@@ -33,6 +35,7 @@ use App\Http\Controllers\Backend\ReservationTimeController;
 use App\Http\Controllers\Backend\SocialLinkController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\TramsAndConditionController;
+use App\Http\Controllers\Backend\UserManagementController;
 use App\Http\Controllers\Backend\WhyChooseUsController;
 
 /** Admin Auth Routes */
@@ -156,6 +159,12 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::post('reservation', [ReservationController::class, 'update'])->name('reservation.update');
     Route::delete('reservation/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 
+    /** Admin management Routes */
+    Route::resource('admin-management', AdminManagementController::class);
+
+    /** Users management Routes */
+    Route::resource('user-management', UserManagementController::class);
+
     /** News letter Routes */
     Route::get('news-letter', [NewsLetterController::class, 'index'])->name('news-letter.index');
     Route::post('news-letter', [NewsLetterController::class, 'sendNewsLetter'])->name('news-letter.send');
@@ -180,4 +189,9 @@ Route::group(['middleware' => ['auth', 'role:admin'], 'prefix' => 'admin', 'as' 
     Route::put('/logo-setting', [SettingController::class, 'UpdateLogoSetting'])->name('logo-setting.update');
     Route::put('/appearance-setting', [SettingController::class, 'UpdateAppearanceSetting'])->name('appearance-setting.update');
     Route::put('/seo-setting', [SettingController::class, 'UpdateSeoSetting'])->name('seo-setting.update');
+
+
+    /** Clear Database Routes */
+    Route::get('/clear-database', [ClearDatabaseController::class, 'index'])->name('clear-database.index');
+    Route::post('/clear-database', [ClearDatabaseController::class, 'clearDB'])->name('clear-database.destroy');
 });

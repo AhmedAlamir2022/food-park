@@ -46,17 +46,17 @@
                                 <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-home" type="button" role="tab"
                                     aria-controls="v-pills-home" aria-selected="true"><span><i
-                                            class="fas fa-user"></i></span> Parsonal Info</button>
+                                            class="fas fa-user"></i></span>Parsonal Info</button>
 
                                 <button class="nav-link" id="v-pills-address-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-address" type="button" role="tab"
                                     aria-controls="v-pills-address" aria-selected="true"><span><i
-                                            class="fas fa-user"></i></span>address</button>
+                                            class="fas fa-user"></i></span>Address</button>
 
                                 <button class="nav-link" id="v-pills-reservation-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-reservation" type="button" role="tab"
                                     aria-controls="v-pills-reservation" aria-selected="false"><span><i
-                                            class="fas fa-bags-shopping"></i></span> Reservations</button>
+                                            class="fas fa-bags-shopping"></i></span>Reservations</button>
 
                                 <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-profile" type="button" role="tab"
@@ -66,12 +66,12 @@
                                 <button class="nav-link" id="v-pills-wishlist-tab2" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-wishlist" type="button" role="tab"
                                     aria-controls="v-pills-wishlist" aria-selected="false"><span><i
-                                            class="far fa-heart"></i></span> wishlist</button>
+                                            class="far fa-heart"></i></span>Wishlist</button>
 
                                 <button class="nav-link" id="v-pills-review-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-review" type="button" role="tab"
                                     aria-controls="v-pills-review" aria-selected="false"><span><i
-                                            class="fas fa-star"></i></span> Reviews</button>
+                                            class="fas fa-star"></i></span>Reviews</button>
                                 {{-- @php
                                     $unseenMessages = \App\Models\Chat::where([
                                         'sender_id' => 1,
@@ -89,7 +89,7 @@
                                 <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill"
                                     data-bs-target="#v-pills-settings" type="button" role="tab"
                                     aria-controls="v-pills-settings" aria-selected="false"><span><i
-                                            class="fas fa-user-lock"></i></span> Change Password </button>
+                                            class="fas fa-user-lock"></i></span>Change Password </button>
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -98,7 +98,7 @@
                                         onclick="event.preventDefault();
                                     this.closest('form').submit();"
                                         type="button"><span> <i class="fas fa-sign-out-alt"></i>
-                                        </span> Logout</button>
+                                        </span>Logout</button>
                                 </form>
                             </div>
                         </div>

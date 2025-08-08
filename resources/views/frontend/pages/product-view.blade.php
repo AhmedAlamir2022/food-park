@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                                BREADCRUMB START
-                            ==============================-->
+                                    BREADCRUMB START
+                                ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset(config('settings.breadcrumb')) }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                                BREADCRUMB END
-                            ==============================-->
+                                    BREADCRUMB END
+                                ==============================-->
 
 
     <!--=============================
-                                MENU DETAILS START
-                            ==============================-->
+                                    MENU DETAILS START
+                                ==============================-->
     <section class="fp__menu_details mt_115 xs_mt_85 mb_95 xs_mb_65">
         <div class="container">
             <div class="row">
@@ -138,7 +138,7 @@
                             @else
                                 <li><a class="common_btn v_submit_button" href="#">add to cart</a></li>
                             @endif
-                            <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>
+                            <li onclick="addToWishlist('{{ $product->id }}')"><a class="wishlist" href="javascript:;"><i class="far fa-heart"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -177,7 +177,8 @@
                                                         <div class="fp__single_comm_text">
                                                             <h3>{{ $review->user->name }}
                                                                 <span>{{ date('d m Y', strtotime($review->created_at)) }}
-                                                                </span></h3>
+                                                                </span>
+                                                            </h3>
                                                             <span class="rating">
                                                                 @for ($i = 1; $i <= $review->rating; $i++)
                                                                     <i class="fas fa-star"></i>
@@ -290,8 +291,10 @@
                                             <li><a href="javascript:;"
                                                     onclick="loadProductModal('{{ $relatedProduct->id }}')"><i
                                                         class="fas fa-shopping-basket"></i></a></li>
-                                            <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
+                                            <li onclick="addToWishlist('{{ $relatedProduct->id }}')"><a href="javascript:;"><i
+                                                        class="fal fa-heart"></i></a></li>
+                                            <li><a href="{{ route('product.show', $product->slug) }}"><i
+                                                        class="far fa-eye"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>

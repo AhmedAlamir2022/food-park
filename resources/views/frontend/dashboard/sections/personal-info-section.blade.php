@@ -4,22 +4,28 @@
 
         <div class="fp__dsahboard_overview">
             <div class="row">
-                <div class="col-xl-4 col-sm-6 col-md-4">
+                <div class="col-xl-3 col-sm-6 col-md-4">
                     <div class="fp__dsahboard_overview_item">
                         <span class="icon"><i class="far fa-shopping-basket"></i></span>
-                        {{-- <h4>total order <span>({{ $totalOrders }})</span></h4> --}}
+                        <h4>Total Orders <span>({{ $totalOrders }})</span></h4>
                     </div>
                 </div>
-                <div class="col-xl-4 col-sm-6 col-md-4">
-                    <div class="fp__dsahboard_overview_item green">
-                        <span class="icon"><i class="far fa-shopping-basket"></i></span>
-                        {{-- <h4>Completed <span>({{ $totalCompleteOrders }})</span></h4> --}}
-                    </div>
-                </div>
-                <div class="col-xl-4 col-sm-6 col-md-4">
+                <div class="col-xl-3 col-sm-6 col-md-4">
                     <div class="fp__dsahboard_overview_item red">
                         <span class="icon"><i class="far fa-shopping-basket"></i></span>
-                        {{-- <h4>cancel <span>({{ $totalCancelOrders }})</span></h4> --}}
+                        <h4>Pending <span>({{ $totalPendingOrders }})</span></h4>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-md-4">
+                    <div class="fp__dsahboard_overview_item green">
+                        <span class="icon"><i class="far fa-shopping-basket"></i></span>
+                        <h4>Completed <span>({{ $totalCompleteOrders }})</span></h4>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-md-4">
+                    <div class="fp__dsahboard_overview_item red">
+                        <span class="icon"><i class="far fa-shopping-basket"></i></span>
+                        <h4>Cancel <span>({{ $totalCancelOrders }})</span></h4>
                     </div>
                 </div>
             </div>
